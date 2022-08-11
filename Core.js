@@ -1,7 +1,7 @@
 process.on('uncaughtException', console.error)
 require("./config")
 const { BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, proto, generateWAMessageContent, generateWAMessage, prepareWAMessageMedia, areJidsSameUser, getContentType, WAFlag } = require('@adiwajshing/baileys')
-const zMiku = require("@adiwajshing/baileys")
+const zLexha = require("@adiwajshing/baileys")
 const fs = require('fs')
 const util = require('util')
 const chalk = require('chalk')
@@ -40,7 +40,7 @@ const { Gempa } = require("./lib/gempa.js");
 const ms = require('ms')
  let { covid } = require('./lib/covid.js') 
 const { jadwaltv }= require('./lib/jadwaltv');
-const { MikuTiktok } = require('./lib/tiktokmikudl');
+const { LexhaTiktok } = require('./lib/tiktokmikudl');
 const maker = require('mumaker')
 const xfarrapi = require('xfarr-api')
 const { hentai } = require('./lib/scraper2.js')
@@ -171,7 +171,7 @@ var syear = (yye < 1000) ? yye + 1900 : yye;
 const jangwak = (hri + '' + buln[bulnh] + '' + syear)
 const janghar = (thisDaye)
 
-module.exports = Miku = async (Miku, m, chatUpdate, store) => {
+module.exports = Lexha = async (Lexha, m, chatUpdate, store) => {
 try {
 var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
 var budy = (typeof m.text == 'string' ? m.text : '')
@@ -180,7 +180,7 @@ const isCmd = body.startsWith(prefix)
 const command = isCmd ? body.slice(1).trim().split(' ')[0].toLowerCase() : ''
 const args = body.trim().split(/ +/).slice(1)
 const pushname = m.pushName || "No Name"
-const botNumber = await Miku.decodeJid(Miku.user.id)
+const botNumber = await Lexha.decodeJid(Lexha.user.id)
 const isCreator = [botNumber, ...global.Owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
 const itsMe = m.sender == botNumber ? true : false
 const text = args.join(" ")
@@ -189,7 +189,7 @@ const quoted = m.quoted ? m.quoted : m
 const mime = (quoted.msg || quoted).mimetype || ''
 const isMedia = /image|video|sticker|audio/.test(mime)
 const messagesD = body.slice(0).trim().split(/ +/).shift().toLowerCase()
-const groupMetadata = m.isGroup ? await Miku.groupMetadata(m.chat).catch(e => {}) : ''
+const groupMetadata = m.isGroup ? await Lexha.groupMetadata(m.chat).catch(e => {}) : ''
 const groupName = m.isGroup ? groupMetadata.subject : ''
 const participants = m.isGroup ? await groupMetadata.participants : ''
 const groupAdmins = m.isGroup ? await participants.filter(v => v.admin !== null).map(v => v.id) : ''
@@ -239,14 +239,14 @@ const isImage = (m.type === 'imageMessage')
         const isQuotedReply = m.mtype === 'extendedTextMessage' && content.includes('Message')
 
 
-_sewa.expiredCheck(Miku, sewa)
+_sewa.expiredCheck(Lexha, sewa)
 
 const reply = (teks) => {
-            Miku.sendMessage(m.chat, { text: teks},{ quoted: m})
+            Lexha.sendMessage(m.chat, { text: teks},{ quoted: m})
         }
         
         const replay = (teks) => {
-            Miku.sendMessage(m.chat, { text: teks}, { quoted: m})
+            Lexha.sendMessage(m.chat, { text: teks}, { quoted: m})
         }
         
 
@@ -454,7 +454,7 @@ var levelRole = getLevelingLevel(m.sender)
             roles = 'Exter'
         }
    
-                        if (m.isGroup && isLeveling && isUser && Miku.public) {
+                        if (m.isGroup && isLeveling && isUser && Lexha.public) {
                                 const currentLevel = getLevelingLevel(m.sender)
                                 const checkId = getLevelingId(m.sender)
                                 try {
@@ -467,7 +467,7 @@ var levelRole = getLevelingLevel(m.sender)
                                         if (requiredXp <= getLevelingXp(m.sender)) {
                                         addLevelingLevel(m.sender, 1)
 teks = `「 *User Level UP* 」\n\n@${m.sender.split("@")[0]} got leveled up!!\n\n*User XP*: ${getLevelingXp(m.sender)}\n*Level*: ${getLevel} -> ${getLevelingLevel(m.sender)}\n*Role*: ${role} \n\n`
-Miku.sendMessage(m.chat, {text: teks, mentions:[m.sender]}, {quoted:m})
+Lexha.sendMessage(m.chat, {text: teks, mentions:[m.sender]}, {quoted:m})
 }
 
                         } catch (err) {
@@ -495,30 +495,30 @@ Miku.sendMessage(m.chat, {text: teks, mentions:[m.sender]}, {quoted:m})
 
 if (autoreadsw) {
 		if (from === 'status@broadcast') {
-		Miku.chatRead(from)
+		Lexha.chatRead(from)
 	}
 	}
 
 if (global.autoreadpmngc) {
 if (command) {
-await Miku.sendPresenceUpdate('composing', m.chat)
-Miku.sendReadReceipt(from, m.sender, [m.key.id])}
+await Lexha.sendPresenceUpdate('composing', m.chat)
+Lexha.sendReadReceipt(from, m.sender, [m.key.id])}
 }
 
   if (global.autoReadGc) {
-  if (m.isGroup) { Miku.sendReadReceipt(m.chat, m.sender, [m.key.id]) }
+  if (m.isGroup) { Lexha.sendReadReceipt(m.chat, m.sender, [m.key.id]) }
 }
 
-  if (global.autoReadAll) { if (m.chat) { Miku.sendReadReceipt(m.chat, m.sender, [m.key.id]) }
+  if (global.autoReadAll) { if (m.chat) { Lexha.sendReadReceipt(m.chat, m.sender, [m.key.id]) }
   }
 
-    if (global.autoRecord) { if (m.chat) { Miku.sendPresenceUpdate('recording', m.chat) }
+    if (global.autoRecord) { if (m.chat) { Lexha.sendPresenceUpdate('recording', m.chat) }
 }
 
-  if (global.autoTyping) { if (m.chat) { Miku.sendPresenceUpdate('composing', m.chat) }
+  if (global.autoTyping) { if (m.chat) { Lexha.sendPresenceUpdate('composing', m.chat) }
 }
 
-  if (global.available) { if (m.chat) { Miku.sendPresenceUpdate('available', m.chat) }
+  if (global.available) { if (m.chat) { Lexha.sendPresenceUpdate('available', m.chat) }
   }
 
 const hariRaya = new Date('6 1, 2022 00:00:00')
@@ -591,7 +591,7 @@ const order = generateWAMessageFromContent(jid, proto.Message.fromObject({
 "totalCurrencyCode": "IDR", 
 }
 }), { userJid: jid })
-Miku.relayMessage(jid, order.message, { messageId: order.key.id})
+Lexha.relayMessage(jid, order.message, { messageId: order.key.id})
 }
 
 
@@ -730,7 +730,7 @@ sendOrder(m.chat, teks, "5123658817728409", fs.readFileSync('./Assets/pic10.jpg'
 
 
 if (AntiLink) {
-    linkgce = await Miku.groupInviteCode(from)
+    linkgce = await Lexha.groupInviteCode(from)
     if (budy.includes(`https://chat.whatsapp.com/${linkgce}`)) {
     reply(`\`\`\`「  Antilink System  」\`\`\`\n\nNo action will be because you sent this group's link.`)
     } else if (isUrl(m.text)) {
@@ -739,8 +739,8 @@ if (AntiLink) {
     if (m.key.fromMe) return reply(bvl)
     if (isCreator) return reply(bvl)
     kice = m.sender
-    await Miku.groupParticipantsUpdate(m.chat, [kice], 'remove').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
-    Miku.sendMessage(from, {text:`\`\`\`「  Antilink System  」\`\`\`\n\n@${kice.split("@")[0]} Baka Has been removed for sending link in this group!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
+    await Lexha.groupParticipantsUpdate(m.chat, [kice], 'remove').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
+    Lexha.sendMessage(from, {text:`\`\`\`「  Antilink System  」\`\`\`\n\n@${kice.split("@")[0]} Baka Has been removed for sending link in this group!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
     } else {
     }
     }
@@ -753,8 +753,8 @@ if (AntiLink) {
   if (m.key.fromMe) return reply(bvl)
   if (isCreator) return reply(bvl)
   kice = m.sender
-  await Miku.groupParticipantsUpdate(m.chat, [kice], 'remove')
-  Miku.sendMessage(from, {text:`\`\`\`「 'wa.me' PM link Detected! 」\`\`\`\n\n@${kice.split("@")[0]} Baka Has been removed for sending link in this group!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
+  await Lexha.groupParticipantsUpdate(m.chat, [kice], 'remove')
+  Lexha.sendMessage(from, {text:`\`\`\`「 'wa.me' PM link Detected! 」\`\`\`\n\n@${kice.split("@")[0]} Baka Has been removed for sending link in this group!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
   } else {
   }
   if (antiWame)
@@ -765,8 +765,8 @@ if (isAdmins) return reply(bvl)
 if (m.key.fromMe) return reply(bvl)
 if (isCreator) return reply(bvl)
 kice = m.sender
-await Miku.groupParticipantsUpdate(m.chat, [kice], 'remove')
-Miku.sendMessage(from, {text:`\`\`\`「 'wa.me' PM link Detected! 」\`\`\`\n\n@${kice.split("@")[0]}  Baka Has been removed for sending link in this group!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
+await Lexha.groupParticipantsUpdate(m.chat, [kice], 'remove')
+Lexha.sendMessage(from, {text:`\`\`\`「 'wa.me' PM link Detected! 」\`\`\`\n\n@${kice.split("@")[0]}  Baka Has been removed for sending link in this group!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
 } else {
 }
 
@@ -775,14 +775,14 @@ if (antiVirtex) {
     reply(`*Caution!*\n\n`.repeat(300))
     reply(`\`\`\`Virus Detected !!\`\`\`\n\nRevoving sender...`)
     if (!isBotAdmins) return reply(mess.botAdmin)
-    Miku.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
+    Lexha.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
     }
     }
 
 
     if (AntiLink) {
         if (!isBotAdmins) return
-        linkgce = await Miku.groupInviteCode(from)
+        linkgce = await Lexha.groupInviteCode(from)
         if (budy.includes(`https://chat.whatsapp.com/${linkgce}`)) {
         reply(`\`\`\`「  Antilink System  」\`\`\`\n\nNo action will be taken because you sent this group's link!`)
         } else if (isUrl(m.text)) {
@@ -791,8 +791,8 @@ if (antiVirtex) {
         if (m.key.fromMe) return reply(bvl)
         if (isCreator) return reply(bvl)
         kice = m.sender
-        await Miku.groupParticipantsUpdate(m.chat, [kice], 'remove')
-        Miku.sendMessage(from, {text:`\`\`\`「  Antilink System  」\`\`\`\n\n@${kice.split("@")[0]} Baka has been removed for sending link in this group!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
+        await Lexha.groupParticipantsUpdate(m.chat, [kice], 'remove')
+        Lexha.sendMessage(from, {text:`\`\`\`「  Antilink System  」\`\`\`\n\n@${kice.split("@")[0]} Baka has been removed for sending link in this group!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
         } else {
         }
         }
@@ -806,8 +806,8 @@ if (antiVirtex) {
         if (m.key.fromMe) return reply(bvl)
         if (isCreator) return reply(bvl)
         kice = m.sender
-        await Miku.groupParticipantsUpdate(m.chat, [kice], 'remove')
-        Miku.sendMessage(from, {text:`\`\`\`「  Antilink System  」\`\`\`\n\n@${kice.split("@")[0]} Baka has been removed for sending Yt video link in this group!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
+        await Lexha.groupParticipantsUpdate(m.chat, [kice], 'remove')
+        Lexha.sendMessage(from, {text:`\`\`\`「  Antilink System  」\`\`\`\n\n@${kice.split("@")[0]} Baka has been removed for sending Yt video link in this group!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
         } else {
         }
         
@@ -819,8 +819,8 @@ if (antiVirtex) {
         if (m.key.fromMe) return reply(bvl)
         if (isCreator) return reply(bvl)
         kice = m.sender
-        await Miku.groupParticipantsUpdate(m.chat, [kice], 'remove')
-        Miku.sendMessage(from, {text:`\`\`\`「  Antilink System  」\`\`\`\n\n@${kice.split("@")[0]} Baka has been removed for sending Yt channel link in this group!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
+        await Lexha.groupParticipantsUpdate(m.chat, [kice], 'remove')
+        Lexha.sendMessage(from, {text:`\`\`\`「  Antilink System  」\`\`\`\n\n@${kice.split("@")[0]} Baka has been removed for sending Yt channel link in this group!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
         } else {
         }
         
@@ -832,8 +832,8 @@ if (antiVirtex) {
         if (m.key.fromMe) return reply(bvl)
         if (isCreator) return reply(bvl)
         kice = m.sender
-        await Miku.groupParticipantsUpdate(m.chat, [kice], 'remove')
-        Miku.sendMessage(from, {text:`\`\`\`「  Antilink System  」\`\`\`\n\n@${kice.split("@")[0]} Baka has been removed for sending Instagram link in this group! No promotion is allowed!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
+        await Lexha.groupParticipantsUpdate(m.chat, [kice], 'remove')
+        Lexha.sendMessage(from, {text:`\`\`\`「  Antilink System  」\`\`\`\n\n@${kice.split("@")[0]} Baka has been removed for sending Instagram link in this group! No promotion is allowed!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
         } else {
         }
         
@@ -845,8 +845,8 @@ if (antiVirtex) {
         if (m.key.fromMe) return reply(bvl)
         if (isCreator) return reply(bvl)
         kice = m.sender
-        await Miku.groupParticipantsUpdate(m.chat, [kice], 'remove')
-        Miku.sendMessage(from, {text:`\`\`\`「  Antilink System  」\`\`\`\n\n@${kice.split("@")[0]} Baka has been removed for sending Facebook link in this group!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
+        await Lexha.groupParticipantsUpdate(m.chat, [kice], 'remove')
+        Lexha.sendMessage(from, {text:`\`\`\`「  Antilink System  」\`\`\`\n\n@${kice.split("@")[0]} Baka has been removed for sending Facebook link in this group!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
         } else {
         }
         
@@ -859,8 +859,8 @@ if (antiVirtex) {
         if (m.key.fromMe) return reply(bvl)
         if (isCreator) return reply(bvl)
         kice = m.sender
-        await Miku.groupParticipantsUpdate(m.chat, [kice], 'remove')
-        Miku.sendMessage(from, {text:`\`\`\`「  Antilink System  」\`\`\`\n\n@${kice.split("@")[0]} Baka has been removed for sending Telegram link in this group!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
+        await Lexha.groupParticipantsUpdate(m.chat, [kice], 'remove')
+        Lexha.sendMessage(from, {text:`\`\`\`「  Antilink System  」\`\`\`\n\n@${kice.split("@")[0]} Baka has been removed for sending Telegram link in this group!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
         } else {
         }
         
@@ -872,8 +872,8 @@ if (antiVirtex) {
         if (m.key.fromMe) return reply(bvl)
         if (isCreator) return reply(bvl)
         kice = m.sender
-        await Miku.groupParticipantsUpdate(m.chat, [kice], 'remove')
-        Miku.sendMessage(from, {text:`\`\`\`「  Antilink System  」\`\`\`\n\n@${kice.split("@")[0]} Baka has been removed for sending Tiktok link in this group!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
+        await Lexha.groupParticipantsUpdate(m.chat, [kice], 'remove')
+        Lexha.sendMessage(from, {text:`\`\`\`「  Antilink System  」\`\`\`\n\n@${kice.split("@")[0]} Baka has been removed for sending Tiktok link in this group!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
         } else {
         }
         
@@ -885,8 +885,8 @@ if (antiVirtex) {
         if (m.key.fromMe) return reply(bvl)
         if (isCreator) return reply(bvl)
         kice = m.sender
-        await Miku.groupParticipantsUpdate(m.chat, [kice], 'remove')
-        Miku.sendMessage(from, {text:`\`\`\`「  Antilink System  」\`\`\`\n\n@${kice.split("@")[0]} Baka has been removed for sending Twitter link in this group!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
+        await Lexha.groupParticipantsUpdate(m.chat, [kice], 'remove')
+        Lexha.sendMessage(from, {text:`\`\`\`「  Antilink System  」\`\`\`\n\n@${kice.split("@")[0]} Baka has been removed for sending Twitter link in this group!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
         } else {
         }
         
@@ -898,8 +898,8 @@ if (antiVirtex) {
         if (m.key.fromMe) return reply(bvl)
         if (isCreator) return reply(bvl)
         kice = m.sender
-        await Miku.groupParticipantsUpdate(m.chat, [kice], 'remove')
-        Miku.sendMessage(from, {text:`\`\`\`「  Antilink System  」\`\`\`\n\n@${kice.split("@")[0]} Baka has been removed for sending links in this group!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
+        await Lexha.groupParticipantsUpdate(m.chat, [kice], 'remove')
+        Lexha.sendMessage(from, {text:`\`\`\`「  Antilink System  」\`\`\`\n\n@${kice.split("@")[0]} Baka has been removed for sending links in this group!`, contextInfo:{mentionedJid:[kice]}}, {quoted:m})
         } else {
         }
         
@@ -912,13 +912,13 @@ ${themeemoji} User : @${m.sender.split("@")[0]}
 ${themeemoji} Clock : ${moment.tz('Asia/Kolkata').format('HH:mm:ss')} 
 ${themeemoji} Date : ${moment.tz('Asia/Kolkata').format('DD/MM/YYYY')}
 ${themeemoji} MessageType : ${m.mtype}`
-Miku.sendTextWithMentions(m.chat, teks, m)
+Lexha.sendTextWithMentions(m.chat, teks, m)
 await sleep(500)
 m.copyNForward(m.chat, true, { readViewOnce: true }).catch(_ => reply(`Maybe it's been opened by a bot`))
 }
 
 
-if (!Miku.public) {
+if (!Lexha.public) {
 if (!m.key.fromMe) return
 }
 
@@ -943,7 +943,7 @@ let cron = require('node-cron')
       kuis = true
       jawaban = tebaklagu[m.sender.split('@')[0]]
       if (budy.toLowerCase() == jawaban) {
-      await Miku.sendButtonText(m.chat, [{ buttonId: 'guess song', buttonText: { displayText: 'Guess The Song' }, type: 1 }], `🎮 Guess The Song 🎮\n\nCorrect answer 🎉\n\nWant to play again? press the button below`, `${global.BotName}`, m)
+      await Lexha.sendButtonText(m.chat, [{ buttonId: 'guess song', buttonText: { displayText: 'Guess The Song' }, type: 1 }], `🎮 Guess The Song 🎮\n\nCorrect answer 🎉\n\nWant to play again? press the button below`, `${global.BotName}`, m)
       delete tebaklagu[m.sender.split('@')[0]]
       } else reply('*Wrong answer!*')
       }
@@ -952,7 +952,7 @@ let cron = require('node-cron')
         kuis = true
         jawaban = tebakgambar[m.sender.split('@')[0]]
         if (budy.toLowerCase() == jawaban) {
-        await Miku.sendButtonText(m.chat, [{ buttonId: 'guess picture', buttonText: { displayText: 'Guess The Picture' }, type: 1 }], `🎮 Guess The Picture 🎮\n\nCorrect Answer 🎉\n\nWant to play again? press the button below`, `${global.BotName}`, m)
+        await Lexha.sendButtonText(m.chat, [{ buttonId: 'guess picture', buttonText: { displayText: 'Guess The Picture' }, type: 1 }], `🎮 Guess The Picture 🎮\n\nCorrect Answer 🎉\n\nWant to play again? press the button below`, `${global.BotName}`, m)
         delete tebakgambar[m.sender.split('@')[0]]
         } else reply('*Wrong answer!*')
         }
@@ -961,7 +961,7 @@ let cron = require('node-cron')
           kuis = true
           jawaban = tebakkata[m.sender.split('@')[0]]
           if (budy.toLowerCase() == jawaban) {
-          await Miku.sendButtonText(m.chat, [{ buttonId: 'guess word', buttonText: { displayText: 'Guess The Word' }, type: 1 }], `🎮 Guess The Word 🎮\n\nCorrect Answer 🎉\n\nWant to play again? press the button below`, `${global.BotName}`, m)
+          await Lexha.sendButtonText(m.chat, [{ buttonId: 'guess word', buttonText: { displayText: 'Guess The Word' }, type: 1 }], `🎮 Guess The Word 🎮\n\nCorrect Answer 🎉\n\nWant to play again? press the button below`, `${global.BotName}`, m)
           delete tebakkata[m.sender.split('@')[0]]
           } else reply('*Wrong answer!*')
           }
@@ -971,7 +971,7 @@ let cron = require('node-cron')
           jawaban = caklontong[m.sender.split('@')[0]]
           deskripsi = caklontong_desk[m.sender.split('@')[0]]
           if (budy.toLowerCase() == jawaban) {
-          await Miku.sendButtonText(m.chat, [{ buttonId: 'guess saying', buttonText: { displayText: 'Guess The Saying' }, type: 1 }], `🎮 Guess The Saying 🎮\n\nCorrect Answer 🎉\n*${deskripsi}*\n\nWant to play again? press the button below`, `${global.BotName}`, m)
+          await Lexha.sendButtonText(m.chat, [{ buttonId: 'guess saying', buttonText: { displayText: 'Guess The Saying' }, type: 1 }], `🎮 Guess The Saying 🎮\n\nCorrect Answer 🎉\n*${deskripsi}*\n\nWant to play again? press the button below`, `${global.BotName}`, m)
           delete caklontong[m.sender.split('@')[0]]
           delete caklontong_desk[m.sender.split('@')[0]]
           } else reply('*Wrong answer!*')
@@ -981,7 +981,7 @@ let cron = require('node-cron')
           kuis = true
           jawaban = tebakkalimat[m.sender.split('@')[0]]
           if (budy.toLowerCase() == jawaban) {
-          await Miku.sendButtonText(m.chat, [{ buttonId: 'guess sentence', buttonText: { displayText: 'Guess The Sentence' }, type: 1 }], `🎮 Guess The Sentence 🎮\n\nCorrect Answer 🎉\n\nWant to play again? press the button below`, `${global.BotName}`, m)
+          await Lexha.sendButtonText(m.chat, [{ buttonId: 'guess sentence', buttonText: { displayText: 'Guess The Sentence' }, type: 1 }], `🎮 Guess The Sentence 🎮\n\nCorrect Answer 🎉\n\nWant to play again? press the button below`, `${global.BotName}`, m)
           delete tebakkalimat[m.sender.split('@')[0]]
           } else reply('*Wrong answer!*')
           }
@@ -990,7 +990,7 @@ let cron = require('node-cron')
           kuis = true
           jawaban = tebaklirik[m.sender.split('@')[0]]
           if (budy.toLowerCase() == jawaban) {
-          await Miku.sendButtonText(m.chat, [{ buttonId: 'guess lyrics', buttonText: { displayText: 'Guess The Lyrics' }, type: 1 }], `🎮 Guess The Lyrics 🎮\n\nCorrect Answer 🎉\n\nWant to play again? press the button below`, `${global.BotName}`, m)
+          await Lexha.sendButtonText(m.chat, [{ buttonId: 'guess lyrics', buttonText: { displayText: 'Guess The Lyrics' }, type: 1 }], `🎮 Guess The Lyrics 🎮\n\nCorrect Answer 🎉\n\nWant to play again? press the button below`, `${global.BotName}`, m)
           delete tebaklirik[m.sender.split('@')[0]]
           } else reply('*Wrong answer!*')
           }
@@ -999,7 +999,7 @@ let cron = require('node-cron')
           kuis = true
           jawaban = tebaktebakan[m.sender.split('@')[0]]
           if (budy.toLowerCase() == jawaban) {
-          await Miku.sendButtonText(m.chat, [{ buttonId: 'riddles', buttonText: { displayText: 'Riddles' }, type: 1 }], `🎮 Riddles 🎮\n\nCorrect Answer 🎉\n\nWant to play again? press the button below`, `${global.BotName}`, m)
+          await Lexha.sendButtonText(m.chat, [{ buttonId: 'riddles', buttonText: { displayText: 'Riddles' }, type: 1 }], `🎮 Riddles 🎮\n\nCorrect Answer 🎉\n\nWant to play again? press the button below`, `${global.BotName}`, m)
           delete tebaktebakan[m.sender.split('@')[0]]
           } else reply('*Wrong answer!*')
           }
@@ -1022,7 +1022,7 @@ let cron = require('node-cron')
           return isSurender || room.terjawab[index] ? `(${index + 1}) ${jawaban} ${room.terjawab[index] ? '@' + room.terjawab[index].split('@')[0] : ''}`.trim() : false
           }).filter(v => v).join('\n')}
           ${isSurender ? '' : `Perfect Player`}`.trim()
-          Miku.sendText(m.chat, caption, m, { contextInfo: { mentionedJid: parseMention(caption) }}).then(mes => { return _family100['family100'+m.chat].pesan = mesg }).catch(_ => _)
+          Lexha.sendText(m.chat, caption, m, { contextInfo: { mentionedJid: parseMention(caption) }}).then(mes => { return _family100['family100'+m.chat].pesan = mesg }).catch(_ => _)
           if (isWin || isSurender) delete _family100['family100'+m.chat]
           }
           
@@ -1034,7 +1034,7 @@ let cron = require('node-cron')
           let tie = false
           if (m.sender == roof.p2 && /^(acc(ept)?|accept|yes|oke?|reject|dont want|later|no(pe)?can|y)/i.test(m.text) && m.isGroup && roof.status == 'wait') {
           if (/^(reject|dont want|later|n|no(pe)?can)/i.test(m.text)) {
-          Miku.sendTextWithMentions(m.chat, `@${roof.p2.split`@`[0]} rejected the suit, the suit is canceled`, m)
+          Lexha.sendTextWithMentions(m.chat, `@${roof.p2.split`@`[0]} rejected the suit, the suit is canceled`, m)
           delete this.suit[roof.id]
           return !0
           }
@@ -1042,19 +1042,19 @@ let cron = require('node-cron')
           roof.asal = m.chat
           clearTimeout(roof.waktu)
           
-          Miku.sendText(m.chat, `Suit has been sent to chat
+          Lexha.sendText(m.chat, `Suit has been sent to chat
           @${roof.p.split`@`[0]} dan 
           @${roof.p2.split`@`[0]}
 
           Please choose a suit in the respective chat"
           Click https://wa.me/${botNumber.split`@`[0]}`, m, { mentions: [roof.p, roof.p2] })
-          if (!roof.pilih) Miku.sendText(roof.p, `Please select \n\nRock🗿\nPaper📄\nScissors✂️`, m)
-          if (!roof.pilih2) Miku.sendText(roof.p2, `Please select \n\nRock🗿\nPaper📄\nScissors✂️`, m)
+          if (!roof.pilih) Lexha.sendText(roof.p, `Please select \n\nRock🗿\nPaper📄\nScissors✂️`, m)
+          if (!roof.pilih2) Lexha.sendText(roof.p2, `Please select \n\nRock🗿\nPaper📄\nScissors✂️`, m)
           roof.waktu_milih = setTimeout(() => {
-          if (!roof.pilih && !roof.pilih2) Miku.sendText(m.chat, `Both players don't want to play,\nSuit canceled`)
+          if (!roof.pilih && !roof.pilih2) Lexha.sendText(m.chat, `Both players don't want to play,\nSuit canceled`)
           else if (!roof.pilih || !roof.pilih2) {
           win = !roof.pilih ? roof.p2 : roof.p
-          Miku.sendTextWithMentions(m.chat, `@${(roof.pilih ? roof.p2 : roof.p).split`@`[0]} don't choose suit, game over`, m)
+          Lexha.sendTextWithMentions(m.chat, `@${(roof.pilih ? roof.p2 : roof.p).split`@`[0]} don't choose suit, game over`, m)
           }
           delete this.suit[roof.id]
           return !0
@@ -1070,13 +1070,13 @@ let cron = require('node-cron')
           roof.pilih = reg.exec(m.text.toLowerCase())[0]
           roof.text = m.text
           reply(`You have chosen ${m.text} ${!roof.pilih2 ? `\n\nWaiting for the opponent to choose` : ''}`)
-          if (!roof.pilih2) Miku.sendText(roof.p2, '_The opponent has chosen_\nNow it is your turn', 0)
+          if (!roof.pilih2) Lexha.sendText(roof.p2, '_The opponent has chosen_\nNow it is your turn', 0)
           }
           if (jwb2 && reg.test(m.text) && !roof.pilih2 && !m.isGroup) {
           roof.pilih2 = reg.exec(m.text.toLowerCase())[0]
           roof.text2 = m.text
           reply(`You have chosen ${m.text} ${!roof.pilih ? `\n\nWaiting for the opponent to choose` : ''}`)
-          if (!roof.pilih) Miku.sendText(roof.p, '_The opponent has chosen_\nNow it is your turn', 0)
+          if (!roof.pilih) Lexha.sendText(roof.p, '_The opponent has chosen_\nNow it is your turn', 0)
           }
           let stage = roof.pilih
           let stage2 = roof.pilih2
@@ -1090,7 +1090,7 @@ let cron = require('node-cron')
             else if (k.test(stage) && b.test(stage2)) win = roof.p
             else if (k.test(stage) && g.test(stage2)) win = roof.p2
             else if (stage == stage2) tie = true
-            Miku.sendText(roof.asal, `_*Suit Results*_${tie ? '\nSERIES' : ''}
+            Lexha.sendText(roof.asal, `_*Suit Results*_${tie ? '\nSERIES' : ''}
             @${roof.p.split`@`[0]} (${roof.text}) ${tie ? '' : roof.p == win ? ` Win \n` : ` Lost \n`}
             @${roof.p2.split`@`[0]} (${roof.text2}) ${tie ? '' : roof.p2 == win ? ` Win \n` : ` Lost \n`}
             `.trim(), m, { mentions: [roof.p, roof.p2] })
@@ -1140,10 +1140,10 @@ let cron = require('node-cron')
               let hash = global.db.sticker[m.msg.fileSha256.toString('base64')]
               let { text, mentionedJid } = hash
               let messages = await generateWAMessage(m.chat, { text: text, mentions: mentionedJid }, {
-              userJid: Miku.user.id,
+              userJid: Lexha.user.id,
               quoted: m.quoted && m.quoted.fakeObj
               })
-              messages.key.fromMe = areJidsSameUser(m.sender, Miku.user.id)
+              messages.key.fromMe = areJidsSameUser(m.sender, Lexha.user.id)
               messages.key.id = m.key.id
               messages.pushName = m.pushName
               if (m.isGroup) messages.participant = m.sender
@@ -1152,13 +1152,13 @@ let cron = require('node-cron')
               messages: [proto.WebMessageInfo.fromObject(messages)],
               type: 'append'
               }
-              Miku.ev.emit('messages.upsert', msg)
+              Lexha.ev.emit('messages.upsert', msg)
               }
           
 
 
               const textImg = (teks) => {
-                Miku.sendMessage(m.chat, { text :teks, }, {quoted: m, thumbnail: fs.readFileSync('./Assets/pic4.jpg')}) 
+                Lexha.sendMessage(m.chat, { text :teks, }, {quoted: m, thumbnail: fs.readFileSync('./Assets/pic4.jpg')}) 
                 }
                 
                
@@ -1195,8 +1195,8 @@ let cron = require('node-cron')
                                },
                   message: { 
                                 "videoMessage": { 
-                                "title": `Miku`,
-                                "h": `Miku`,
+                                "title": `Lexha`,
+                                "h": `Lexha`,
                                 'duration': '99999', 
                                 'gifPlayback': 'true', 
                                 'caption': `Fantox`,
@@ -1412,7 +1412,7 @@ switch(command) {
     }}*/
 
     }
-    Miku.sendMessage(m.chat, buttonMessage, { quoted: m })
+    Lexha.sendMessage(m.chat, buttonMessage, { quoted: m })
     }
     break
 
@@ -1426,13 +1426,13 @@ case 'me': case 'profile': case 'p':
      
 
      var flob = await getBuffer(picak+'User Profile')
-     var bio= await Miku.fetchStatus(m.sender)
+     var bio= await Lexha.fetchStatus(m.sender)
      var bioo = bio.status
      const adn= isAdmins? "True":"False"
      
      try {
         
-        pfp=await Miku.profilePictureUrl(m.sender, 'image')
+        pfp=await Lexha.profilePictureUrl(m.sender, 'image')
     
           } catch (e) {
      
@@ -1453,7 +1453,7 @@ let buttonspro = [
                 buttons: buttonspro,
                 headerType: 4
             }
-        Miku.sendMessage(m.chat,buttonMessage,{quoted:m})
+        Lexha.sendMessage(m.chat,buttonMessage,{quoted:m})
         	
             break
 
@@ -1465,13 +1465,13 @@ if (args[0] === "on") {
 if (isBanChat) return replay('This Group is Already Banned from using me!')
 banchat.push(from)
 replay('This Group has been banned from using me!')
-var groupe = await Miku.groupMetadata(from)
+var groupe = await Lexha.groupMetadata(from)
 var members = groupe['participants']
 var mems = []
 members.map(async adm => {
 mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
 })
-Miku.sendMessage(from, {text: `\`\`\`「 Notice 」\`\`\`\n\nThis group is banned from using bot. So, here nobody can use me anymore!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
+Lexha.sendMessage(from, {text: `\`\`\`「 Notice 」\`\`\`\n\nThis group is banned from using bot. So, here nobody can use me anymore!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
 } else if (args[0] === "off") {
 if (!isBanChat) return replay('This Group is Already Banned from using me!')
 let off = banchat.indexOf(from)
@@ -1482,7 +1482,7 @@ replay('This Group has been *unbanned* from using me!')
   { buttonId: `-bangroup on`, buttonText: { displayText: 'Ban' }, type: 1 },
   { buttonId: `-bangroup off`, buttonText: { displayText: 'Unban' }, type: 1 }
   ]
-  await Miku.sendButtonText(m.chat, buttonsntnsfw, `Please choose any Button below.\n\n *On / Off*`, `${global.BotName }`, m)
+  await Lexha.sendButtonText(m.chat, buttonsntnsfw, `Please choose any Button below.\n\n *On / Off*`, `${global.BotName }`, m)
   }
   }
   break
@@ -1510,21 +1510,21 @@ break
 case 'getsxvdxcmd': {
 if (isBan) return reply(mess.ban)	 			
 if (isBanChat) return reply(mess.banChat)
-Miku.sendMessage(from, {sticker:{url:"https://ZackMiku.github.io/media/menu.webp"}}, {quoted:m})
-Miku.sendMessage(from, {sticker:{url:"https://ZackMiku.github.io/media/groupopen.webp"}}, {quoted:m})
-Miku.sendMessage(from, {sticker:{url:"https://ZackMiku.github.io/media/groupclose.webp"}}, {quoted:m})
+Lexha.sendMessage(from, {sticker:{url:"https://ZackLexha.github.io/media/menu.webp"}}, {quoted:m})
+Lexha.sendMessage(from, {sticker:{url:"https://ZackLexha.github.io/media/groupopen.webp"}}, {quoted:m})
+Lexha.sendMessage(from, {sticker:{url:"https://ZackLexha.github.io/media/groupclose.webp"}}, {quoted:m})
 }
 break
 
 
 case 'support': case 'supportgc':
     
-    reply(`*My developer's group:* http://gg.gg/MikuSupport`)
+    reply(`*My developer's group:* http://gg.gg/LexhaSupport`)
     break
 
 case 'repo': case 'botrepo':
     
-    reply(`*My Source Code:* https://github.com/FantoX001/Miku-MD`)
+    reply(`*My Source Code:* https://github.com/FantoX001/Lexha-MD`)
     break
 
 case 'nsfwmenu':
@@ -1563,7 +1563,7 @@ case 'ringtone': {
         let { ringtone } = require('./lib/scraper')
 		let anu = await ringtone(text)
 		let result = anu[Math.floor(Math.random() * anu.length)]
-		Miku.sendMessage(m.chat, { audio: { url: result.audio }, fileName: result.title+'.mp3', mimetype: 'audio/mpeg' }, { quoted: m })
+		Lexha.sendMessage(m.chat, { audio: { url: result.audio }, fileName: result.title+'.mp3', mimetype: 'audio/mpeg' }, { quoted: m })
 	    }
 	    break
 
@@ -1579,7 +1579,7 @@ xfarrapi.Film(q)
 			    for (let i of data) {
                 krl += (`-----------------------------------------------------------------------------\n\n\n*Movie Name:* ${i.judul}\n *Quality :* ${i.quality}\n *Type : ${i.type}*\n *Uploaded on :* ${i.upload}\n *Source URL :* ${i.link}\n\n\n`)
                 }
-               Miku.sendMessage(from, { image: { url: data[0].thumb}, caption: krl }, { quoted: fdocs })
+               Lexha.sendMessage(from, { image: { url: data[0].thumb}, caption: krl }, { quoted: fdocs })
 });
 break
 
@@ -1605,7 +1605,7 @@ let buttons = [
             buttons: buttons,
             headerType: 4
         }
-        Miku.sendMessage(m.chat, buttonMessage, { quoted: m })
+        Lexha.sendMessage(m.chat, buttonMessage, { quoted: m })
     }
     break
 
@@ -1627,7 +1627,7 @@ if (isBanChat) return reply(mess.bangc)
             buttons: buttons,
             headerType: 4
         }
-        Miku.sendMessage(m.chat, buttonMessage, { quoted: m })
+        Lexha.sendMessage(m.chat, buttonMessage, { quoted: m })
     }
     break
 
@@ -1636,7 +1636,7 @@ if (isBan) return reply(mess.banned)
 if (isBanChat) return reply(mess.bangc)
 				   let cok = await fetchJson(`http://api.lolhuman.xyz/api/random/quotesimage?apikey=${lolkey}`)
 				   reply(mess.waiting)
-				  Miku.sendMessage(m.chat, { image: { url: cok }, caption: 'Here it is...' }, { quoted: m })
+				  Lexha.sendMessage(m.chat, { image: { url: cok }, caption: 'Here it is...' }, { quoted: m })
 				  break
 
 case 'quotesanime': case 'quoteanime': case 'animequote': case 'animequotes':{
@@ -1648,11 +1648,11 @@ case 'quotesanime': case 'quoteanime': case 'animequote': case 'animequotes':{
         ]
         let buttonMessage = {
             text: `_${hasil.quotes}_\n\nBy '${hasil.karakter}', ${hasil.anime}\n\n- ${hasil.up_at}`,
-            footer: 'Miku',
+            footer: 'Lexha',
             buttons: buttons,
             headerType: 2
         }
-        Miku.sendMessage(m.chat, buttonMessage, { quoted: m })
+        Lexha.sendMessage(m.chat, buttonMessage, { quoted: m })
     }
     break
 
@@ -1677,7 +1677,7 @@ let sections = []
      }
      sections.push(list)   
      }
-  const sendm =  Miku.sendMessage(
+  const sendm =  Lexha.sendMessage(
       from, 
       {
        text: "Anime Search",
@@ -1720,7 +1720,7 @@ if (isBanChat) return reply(mess.bangc)
            }
                 sections.push(yy)
             }
-            const sendm =  Miku.sendMessage(
+            const sendm =  Lexha.sendMessage(
 from, 
 {
 text: "Group Settings",
@@ -1738,7 +1738,7 @@ case 'animesearchxxx': case 'anime':{
     await fetchJson(`https://api.jikan.moe/v4/anime/${q}`)
     .then((res) => {
     let txt = `   _Anime Search Engine_ \n\n*Title:* *${res.data.title}*\n*English:* *${res.data.title_english}*\n*Japanese:* *${res.data.title_japanese}*\n*Anime Type:* *${res.data.type}*\n*Adaptation:* *${res.data.source}*\n*Total Episode:* *${res.data.episodes}*\n*Status:* *${res.data.status}*\n*Ongoing:* *${res.data.airing ? 'Yes' : 'No'}*\n*Aired:* *${res.data.aired.string}*\n*Duration:* *${res.data.duration}*\n*Rating:* *${res.data.rating}*\n*Score:* *${res.data.score}*\n*Rank:* *${res.data.rank}*\n*Main Producer:* *${res.data.producers.name}*\n*Studio:* *${res.data.studios[0].name}* `
-    Miku.sendMessage(from, { image : { url : res.data.images.jpg.image_url}, caption : txt}, {quoted :m }) 
+    Lexha.sendMessage(from, { image : { url : res.data.images.jpg.image_url}, caption : txt}, {quoted :m }) 
     })
     }
     break
@@ -1757,7 +1757,7 @@ case 'coffee': case 'kopi': {
                         buttons: buttons,
                         headerType: 4
                     }
-                    Miku.sendMessage(m.chat, buttonMessage, { quoted: m })
+                    Lexha.sendMessage(m.chat, buttonMessage, { quoted: m })
                 }
                 break
 
@@ -1770,7 +1770,7 @@ if (!q) reply(`*Example :* ${prefix + command} 🦉+🤣`)
 let [emoji1, emoji2] = q.split`+`
 let kuntuh = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(emoji1)}_${encodeURIComponent(emoji2)}`)
 for (let res of kuntuh.results) {
-let encmedia = await Miku.sendImageAsSticker(from, res.url, m, { packname: global.packname, author: global.author, categories: res.tags })
+let encmedia = await Lexha.sendImageAsSticker(from, res.url, m, { packname: global.packname, author: global.author, categories: res.tags })
 await fs.unlinkSync(encmedia)
 }
 }
@@ -1793,8 +1793,8 @@ break
 if (isBanChat) return reply(mess.bangc)
 if (!args.join(" ")) return reply('Where is the emoji?')
 emoji.get(args.join(" ")).then(async(emoji) => {
-let mese = await Miku.sendMessage(m.chat, {image:{url:emoji.images[4].url}, caption: `Here it is...`}, {quoted:m})
-await Miku.sendMessage(from, {text:"reply -s to this image to make sticker"}, {quoted:mese})
+let mese = await Lexha.sendMessage(m.chat, {image:{url:emoji.images[4].url}, caption: `Here it is...`}, {quoted:m})
+await Lexha.sendMessage(from, {text:"reply -s to this image to make sticker"}, {quoted:mese})
 })
 }
 break
@@ -1805,7 +1805,7 @@ case 'delete': case 'del': {
  if (!m.quoted) return
  let { chat, fromMe, id, isBaileys } = m.quoted
  if (!isBaileys) return replay('How can i delete messages of other person? Baka!')
- Miku.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: true, id: m.quoted.id, participant: m.quoted.sender } })
+ Lexha.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: true, id: m.quoted.id, participant: m.quoted.sender } })
  }
  break
 
@@ -1814,11 +1814,11 @@ case 'delete': case 'del': {
     if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
  let anu = await store.chats.all().filter(v => v.id.endsWith('.net')).map(v => v)
- let teks = ` 「  Miku's pm user list  」\n\nTotal ${anu.length} users are using Miku in personal chat.`
+ let teks = ` 「  Lexha's pm user list  」\n\nTotal ${anu.length} users are using Lexha in personal chat.`
  for (let i of anu) {
   teks += `\n\nProfile : @${i.id.split('@')[0]}\nChat : ${i.unreadCount}\nLastchat : ${moment(i.conversationTimestamp * 1000).tz("Asia/Kolkata").format("DD/MM/YYYY HH:mm:ss")}`
  }
- Miku.sendTextWithMentions(m.chat, teks, m)
+ Lexha.sendTextWithMentions(m.chat, teks, m)
  }
  break
 
@@ -1826,9 +1826,9 @@ case 'delete': case 'del': {
     if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
  let anu = await store.chats.all().filter(v => v.id.endsWith('@g.us')).map(v => v.id)
- let teks = ` 「  Miku's group user list  」\n\nTotal ${anu.length} users are using bot in Groups.`
+ let teks = ` 「  Lexha's group user list  」\n\nTotal ${anu.length} users are using bot in Groups.`
  for (let i of anu) {
-  let metadata = await Miku.groupMetadata(i)
+  let metadata = await Lexha.groupMetadata(i)
   if (metadata.owner === "undefined") {
   loldd = false
   } else {
@@ -1836,7 +1836,7 @@ case 'delete': case 'del': {
   }
   teks += `\n\nName : ${metadata.subject ? metadata.subject : "undefined"}\nOwner : ${loldd ? '@' + loldd.split("@")[0] : "undefined"}\nID : ${metadata.id ? metadata.id : "undefined"}\nMade : ${metadata.creation ? moment(metadata.creation * 1000).tz('Asia/Kolkata').format('DD/MM/YYYY HH:mm:ss') : "undefined"}\nMember : ${metadata.participants.length ? metadata.participants.length : "undefined"}`
  }
- Miku.sendTextWithMentions(m.chat, teks, m)
+ Lexha.sendTextWithMentions(m.chat, teks, m)
  }
  break
 
@@ -1896,7 +1896,7 @@ case 'delete': case 'del': {
    { buttonId: `-welcome on`, buttonText: { displayText: 'On' }, type: 1 },
    { buttonId: `-welcome off`, buttonText: { displayText: 'Off' }, type: 1 }
    ]
-   await Miku.sendButtonText(m.chat, buttonswlcm, `Please choose any button below\n\n_On_ to Activate\n_Off_ to Deactivate`, `${global.BotName}`, m)
+   await Lexha.sendButtonText(m.chat, buttonswlcm, `Please choose any button below\n\n_On_ to Activate\n_Off_ to Deactivate`, `${global.BotName}`, m)
    }
    }
    break
@@ -1931,13 +1931,13 @@ case 'delete': case 'del': {
  if (AntiLink) return replay('Already activated')
  ntilink.push(from)
  replay('Activated _Antilink_ in this group.')
- var groupe = await Miku.groupMetadata(from)
+ var groupe = await Lexha.groupMetadata(from)
  var members = groupe['participants']
  var mems = []
  members.map(async adm => {
  mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
  })
- Miku.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
+ Lexha.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
  } else if (args[0] === "off") {
  if (!AntiLink) return replay('Already deactivated!')
  let off = ntilink.indexOf(from)
@@ -1948,7 +1948,7 @@ case 'delete': case 'del': {
    { buttonId: `-antilinkgc on`, buttonText: { displayText: 'On' }, type: 1 },
    { buttonId: `-antilinkgc off`, buttonText: { displayText: 'Off' }, type: 1 }
    ]
-   await Miku.sendButtonText(m.chat, buttonsntilink, `Please click the button below On / Off`, `${global.BotName}`, m)
+   await Lexha.sendButtonText(m.chat, buttonsntilink, `Please click the button below On / Off`, `${global.BotName}`, m)
    }
    }
    break
@@ -1964,13 +1964,13 @@ case 'delete': case 'del': {
  if (AntiLinkYoutubeVid) return replay('Already activated')
  ntilinkytvid.push(from)
  replay('Activated youtube video antilink !')
- var groupe = await Miku.groupMetadata(from)
+ var groupe = await Lexha.groupMetadata(from)
  var members = groupe['participants']
  var mems = []
  members.map(async adm => {
  mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
  })
- Miku.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
+ Lexha.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
  } else if (args[0] === "off") {
  if (!AntiLinkYoutubeVid) return replay('Already deactivated')
  let off = ntilinkytvid.indexOf(from)
@@ -1981,7 +1981,7 @@ case 'delete': case 'del': {
    { buttonId: `-antilinkyoutubevideo on`, buttonText: { displayText: 'On' }, type: 1 },
    { buttonId: `-antilinkyoutubevideo off`, buttonText: { displayText: 'Off' }, type: 1 }
    ]
-   await Miku.sendButtonText(m.chat, buttonsntilink, `Please click the button below On / Off`, `${global.BotName}`, m)
+   await Lexha.sendButtonText(m.chat, buttonsntilink, `Please click the button below On / Off`, `${global.BotName}`, m)
    }
    }
    break
@@ -1998,13 +1998,13 @@ case 'delete': case 'del': {
  if (AntiLinkYoutubeChannel) return replay('Already activated')
  ntilinkytch.push(from)
  replay('Activated youtube channel antilink !')
- var groupe = await Miku.groupMetadata(from)
+ var groupe = await Lexha.groupMetadata(from)
  var members = groupe['participants']
  var mems = []
  members.map(async adm => {
  mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
  })
- Miku.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
+ Lexha.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
  } else if (args[0] === "off") {
  if (!AntiLinkYoutubeChannel) return replay('Already deactivated')
  let off = ntilinkytch.indexOf(from)
@@ -2015,7 +2015,7 @@ case 'delete': case 'del': {
    { buttonId: `-antilinkyoutubech on`, buttonText: { displayText: 'On' }, type: 1 },
    { buttonId: `-antilinkyoutubech off`, buttonText: { displayText: 'Off' }, type: 1 }
    ]
-   await Miku.sendButtonText(m.chat, buttonsntilink, `Please click the button below On / Off`, `${global.BotName}`, m)
+   await Lexha.sendButtonText(m.chat, buttonsntilink, `Please click the button below On / Off`, `${global.BotName}`, m)
    }
    }
    break
@@ -2031,13 +2031,13 @@ case 'delete': case 'del': {
  if (AntiLinkInstagram) return replay('Already activated')
  ntilinkig.push(from)
  replay('Activated instagram antilink !')
- var groupe = await Miku.groupMetadata(from)
+ var groupe = await Lexha.groupMetadata(from)
  var members = groupe['participants']
  var mems = []
  members.map(async adm => {
  mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
  })
- Miku.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
+ Lexha.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
  } else if (args[0] === "off") {
  if (!AntiLinkInstagram) return replay('Already deactivated')
  let off = ntilinkig.indexOf(from)
@@ -2048,7 +2048,7 @@ case 'delete': case 'del': {
    { buttonId: `-antilinkinstagram on`, buttonText: { displayText: 'On' }, type: 1 },
    { buttonId: `-antilinkinstagram off`, buttonText: { displayText: 'Off' }, type: 1 }
    ]
-   await Miku.sendButtonText(m.chat, buttonsntilink, `Please click the button below On / Off`, `${global.BotName}`, m)
+   await Lexha.sendButtonText(m.chat, buttonsntilink, `Please click the button below On / Off`, `${global.BotName}`, m)
    }
    }
    break
@@ -2063,13 +2063,13 @@ case 'delete': case 'del': {
  if (AntiLinkFacebook) return replay('Already activated')
  ntilinkfb.push(from)
  replay('Activated facebook antilink !')
- var groupe = await Miku.groupMetadata(from)
+ var groupe = await Lexha.groupMetadata(from)
  var members = groupe['participants']
  var mems = []
  members.map(async adm => {
  mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
  })
- Miku.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
+ Lexha.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
  } else if (args[0] === "off") {
  if (!AntiLinkFacebook) return replay('Already deactivated')
  let off = ntilinkfb.indexOf(from)
@@ -2080,7 +2080,7 @@ case 'delete': case 'del': {
    { buttonId: `-antilinkfacebook on`, buttonText: { displayText: 'On' }, type: 1 },
    { buttonId: `-antilinkfacebook off`, buttonText: { displayText: 'Off' }, type: 1 }
    ]
-   await Miku.sendButtonText(m.chat, buttonsntilink, `Please click the button below On / Off `, `${global.BotName}`, m)
+   await Lexha.sendButtonText(m.chat, buttonsntilink, `Please click the button below On / Off `, `${global.BotName}`, m)
    }
    }
    break
@@ -2096,13 +2096,13 @@ case 'delete': case 'del': {
  if (AntiLinkTelegram) return replay('Already activated')
  ntilinktg.push(from)
  replay('Activated telegram antilink !')
- var groupe = await Miku.groupMetadata(from)
+ var groupe = await Lexha.groupMetadata(from)
  var members = groupe['participants']
  var mems = []
  members.map(async adm => {
  mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
  })
- Miku.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
+ Lexha.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
  } else if (args[0] === "off") {
  if (!AntiLinkTelegram) return replay('Already deactivated')
  let off = ntilinkig.indexOf(from)
@@ -2113,7 +2113,7 @@ case 'delete': case 'del': {
    { buttonId: `-antilinktelegram on`, buttonText: { displayText: 'On' }, type: 1 },
    { buttonId: `-antilinktelegram off`, buttonText: { displayText: 'Off' }, type: 1 }
    ]
-   await Miku.sendButtonText(m.chat, buttonsntilink, `Please click the button below On / Off `, `${global.BotName}`, m)
+   await Lexha.sendButtonText(m.chat, buttonsntilink, `Please click the button below On / Off `, `${global.BotName}`, m)
    }
    }
    break
@@ -2129,13 +2129,13 @@ case 'delete': case 'del': {
  if (AntiLinkTiktok) return replay('Already activated')
  ntilinktt.push(from)
  replay('Activated tiktok antilink !')
- var groupe = await Miku.groupMetadata(from)
+ var groupe = await Lexha.groupMetadata(from)
  var members = groupe['participants']
  var mems = []
  members.map(async adm => {
  mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
  })
- Miku.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
+ Lexha.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
  } else if (args[0] === "off") {
  if (!AntiLinkTiktok) return replay('Already deactivated')
  let off = ntilinktt.indexOf(from)
@@ -2146,7 +2146,7 @@ case 'delete': case 'del': {
    { buttonId: `-antilinktiktok on`, buttonText: { displayText: 'On' }, type: 1 },
    { buttonId: `-antilinktiktok off`, buttonText: { displayText: 'Off' }, type: 1 }
    ]
-   await Miku.sendButtonText(m.chat, buttonsntilink, `Please click the button below\n\nOn to enable\nOff to disable`, `${global.BotName}`, m)
+   await Lexha.sendButtonText(m.chat, buttonsntilink, `Please click the button below\n\nOn to enable\nOff to disable`, `${global.BotName}`, m)
    }
    }
    break
@@ -2161,13 +2161,13 @@ case 'delete': case 'del': {
  if (AntiLinkTwitter) return replay('Already activated')
  ntilinktwt.push(from)
  replay('Activated twitter antilink in this group !')
- var groupe = await Miku.groupMetadata(from)
+ var groupe = await Lexha.groupMetadata(from)
  var members = groupe['participants']
  var mems = []
  members.map(async adm => {
  mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
  })
- Miku.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
+ Lexha.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
  } else if (args[0] === "off") {
  if (!AntiLinkTwitter) return replay('Already deactivated')
  let off = ntilinktwt.indexOf(from)
@@ -2178,7 +2178,7 @@ case 'delete': case 'del': {
    { buttonId: `-antilinktwt on`, buttonText: { displayText: 'On' }, type: 1 },
    { buttonId: `-antilinktwt off`, buttonText: { displayText: 'Off' }, type: 1 }
    ]
-   await Miku.sendButtonText(m.chat, buttonsntilink, `Please click the button below\n\nOn to enable\nOff to disable`, `${global.BotName}`, m)
+   await Lexha.sendButtonText(m.chat, buttonsntilink, `Please click the button below\n\nOn to enable\nOff to disable`, `${global.BotName}`, m)
    }
    }
    break
@@ -2194,13 +2194,13 @@ case 'delete': case 'del': {
  if (AntiLinkTwitter) return replay('Already activated')
  ntilinkall.push(from)
  replay('Enabled all antilink !')
- var groupe = await Miku.groupMetadata(from)
+ var groupe = await Lexha.groupMetadata(from)
  var members = groupe['participants']
  var mems = []
  members.map(async adm => {
  mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
  })
- Miku.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
+ Lexha.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
  } else if (args[0] === "off") {
  if (!AntiLinkAll) return replay('Already deactivated')
  let off = ntilinkall.indexOf(from)
@@ -2211,7 +2211,7 @@ case 'delete': case 'del': {
    { buttonId: `-antilinkall on`, buttonText: { displayText: 'On' }, type: 1 },
    { buttonId: `-antilinkall off`, buttonText: { displayText: 'Off' }, type: 1 }
    ]
-   await Miku.sendButtonText(m.chat, buttonsntilink, `Please click the button below\n\nOn to enable\nOff to disable`, `${global.BotName}`, m)
+   await Lexha.sendButtonText(m.chat, buttonsntilink, `Please click the button below\n\nOn to enable\nOff to disable`, `${global.BotName}`, m)
    }
    }
    break
@@ -2227,13 +2227,13 @@ case 'delete': case 'del': {
  if (antiWame) return replay('Already activated')
  ntwame.push(from)
  replay('Activated antiwame !')
- var groupe = await Miku.groupMetadata(from)
+ var groupe = await Lexha.groupMetadata(from)
  var members = groupe['participants']
  var mems = []
  members.map(async adm => {
  mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
  })
- Miku.sendMessage(from, {text: `\`\`\`*「  Warning  」*\`\`\`\n\nAntilink is enabled!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
+ Lexha.sendMessage(from, {text: `\`\`\`*「  Warning  」*\`\`\`\n\nAntilink is enabled!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
  } else if (args[0] === "off") {
  if (!antiWame) return replay('Already deactivated')
  let off = nttoxic.indexOf(from)
@@ -2244,7 +2244,7 @@ case 'delete': case 'del': {
    { buttonId: `-antiwame on`, buttonText: { displayText: 'On' }, type: 1 },
    { buttonId: `-antiwame off`, buttonText: { displayText: 'Off' }, type: 1 }
    ]
-   await Miku.sendButtonText(m.chat, buttonsntwame, `Please click the button below\n\nOn to enable\nOff to disable`, `${global.BotName}`, m)
+   await Lexha.sendButtonText(m.chat, buttonsntwame, `Please click the button below\n\nOn to enable\nOff to disable`, `${global.BotName}`, m)
    }
    }
    break
@@ -2260,13 +2260,13 @@ case 'delete': case 'del': {
  if (AntiNsfw) return replay('Already activated')
  ntnsfw.push(from)
  replay('Enabled NSFW Commands!')
- var groupe = await Miku.groupMetadata(from)
+ var groupe = await Lexha.groupMetadata(from)
  var members = groupe['participants']
  var mems = []
  members.map(async adm => {
  mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
  })
- Miku.sendMessage(from, {text: `\`\`\`「 Notice 」\`\`\`\n\nNSFW(not safe for work) feature has been enabled in this group, which means anyone here can accesss Adult commands!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
+ Lexha.sendMessage(from, {text: `\`\`\`「 Notice 」\`\`\`\n\nNSFW(not safe for work) feature has been enabled in this group, which means anyone here can accesss Adult commands!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
  } else if (args[0] === "off") {
  if (!AntiNsfw) return replay('Already deactivated')
  let off = ntnsfw.indexOf(from)
@@ -2277,7 +2277,7 @@ case 'delete': case 'del': {
    { buttonId: `-nsfw on`, buttonText: { displayText: 'On' }, type: 1 },
    { buttonId: `-nsfw off`, buttonText: { displayText: 'Off' }, type: 1 }
    ]
-   await Miku.sendButtonText(m.chat, buttonsntnsfw, `Please click the button below\n\nOn to enable\nOff to disable`, `${global.BotName}`, m)
+   await Lexha.sendButtonText(m.chat, buttonsntnsfw, `Please click the button below\n\nOn to enable\nOff to disable`, `${global.BotName}`, m)
    }
    }
    break
@@ -2317,7 +2317,7 @@ case 'listonline': case 'listaktif': case 'here':{
  let id = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : m.chat
  let online = [...Object.keys(store.presences[id]), botNumber]
  let liston = 1
- Miku.sendText(m.chat, '  「 *Online Members* 」\n\n' + online.map(v => `${liston++} . @` + v.replace(/@.+/, '')).join`\n`, m, { mentions: online })
+ Lexha.sendText(m.chat, '  「 *Online Members* 」\n\n' + online.map(v => `${liston++} . @` + v.replace(/@.+/, '')).join`\n`, m, { mentions: online })
  }
  break
 
@@ -2369,7 +2369,7 @@ case 'happymod': {
  buttons: buttons,
  headerType: 4
  }
- Miku.sendMessage(m.chat, buttonMessage, { quoted: m })
+ Lexha.sendMessage(m.chat, buttonMessage, { quoted: m })
  })
  }
  break
@@ -2385,7 +2385,7 @@ case 'happymod': {
  for (let i of search.all) {
  teks += `Result No : ${no++}\n\nTitle : ${i.title}\n\nViews : ${i.views}\n\nDuration : ${i.timestamp}\n\nUploaded : ${i.ago}\n\nAuthor : ${i.author.name}\n\nUrl : ${i.url}\n\n\n-----------------------------------------------------------------------------\n\n\n`
  }
- Miku.sendMessage(m.chat, { image: { url: search.all[0].thumbnail },  caption: teks }, { quoted: m })
+ Lexha.sendMessage(m.chat, { image: { url: search.all[0].thumbnail },  caption: teks }, { quoted: m })
  }
  break
 
@@ -2396,7 +2396,7 @@ case 'happymod': {
  if (!isBotAdmins) return replay(mess.botadmin)
  if (!isAdmins && !isCreator) return replay(mess.useradmin)
  if (!text) return replay('Pls enter -setname <New Group Name>  to change this Group Name')
- await Miku.groupUpdateSubject(m.chat, text).then((res) => replay(mess.jobdone)).catch((err) => replay(jsonformat(err)))
+ await Lexha.groupUpdateSubject(m.chat, text).then((res) => replay(mess.jobdone)).catch((err) => replay(jsonformat(err)))
  }
  break
 
@@ -2405,7 +2405,7 @@ case 'block': {
 if (isBanChat) return reply(mess.bangc)
      if (!isCreator) return reply(mess.botowner)
      let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-     await Miku.updateBlockStatus(users, 'block').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
+     await Lexha.updateBlockStatus(users, 'block').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
  }
  break
 
@@ -2414,7 +2414,7 @@ case 'unblock': {
 if (isBanChat) return reply(mess.bangc)
      if (!isCreator) return reply(mess.botowner)
      let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-     await Miku.updateBlockStatus(users, 'unblock').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
+     await Lexha.updateBlockStatus(users, 'unblock').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
  }
  break
 
@@ -2425,7 +2425,7 @@ if (isBanChat) return reply(mess.bangc)
  if (!isBotAdmins) return replay(mess.botadmin)
  if (!isAdmins && !isCreator) return replay(mess.useradmin)
  if (!text) return replay('Pls enter -setname <New Group Description>  to change this Group Description.')
- await Miku.groupUpdateDescription(m.chat, text).then((res) => replay(mess.jobdone)).catch((err) => replay(jsonformat(err)))
+ await Lexha.groupUpdateDescription(m.chat, text).then((res) => replay(mess.jobdone)).catch((err) => replay(jsonformat(err)))
  }
  break
 
@@ -2438,8 +2438,8 @@ if (isBanChat) return reply(mess.bangc)
  if (!quoted) return replay(`Send/Reply Image With Caption ${prefix + command}`)
  if (!/image/.test(mime)) return replay(`Send/Reply Image With Caption ${prefix + command} to change the Profile Pic of this group.`)
  if (/webp/.test(mime)) return replay(`Send/Reply Image With Caption ${prefix + command} to change the Profile Pic of this group.`)
- let media = await Miku.downloadAndSaveMediaMessage(quoted)
- await Miku.updateProfilePicture(m.chat, { url: media }).catch((err) => fs.unlinkSync(media))
+ let media = await Lexha.downloadAndSaveMediaMessage(quoted)
+ await Lexha.updateProfilePicture(m.chat, { url: media }).catch((err) => fs.unlinkSync(media))
  replay(mess.jobdone)
  }
  break
@@ -2455,7 +2455,7 @@ if (isBanChat) return reply(mess.bangc)
  for (let mem of participants) {
  teks += `» @${mem.id.split('@')[0]}\n`
  }
- Miku.sendMessage(m.chat, { text: teks, mentions: participants.map(a => a.id) }, { quoted: m })
+ Lexha.sendMessage(m.chat, { text: teks, mentions: participants.map(a => a.id) }, { quoted: m })
  }
  break
 
@@ -2464,7 +2464,7 @@ if (isBanChat) return reply(mess.bangc)
  if (isBanChat) return reply(mess.bangc)
  if (!m.isGroup) return replay(mess.grouponly)
  if (!isAdmins && !isCreator) return replay(mess.useradmin)
- Miku.sendMessage(m.chat, { text : args.join(" ") ? args.join(" ") : '' , mentions: participants.map(a => a.id)}, { quoted: m })
+ Lexha.sendMessage(m.chat, { text : args.join(" ") ? args.join(" ") : '' , mentions: participants.map(a => a.id)}, { quoted: m })
  }
  break
 
@@ -2474,8 +2474,8 @@ if (isBanChat) return reply(mess.bangc)
  if (isBanChat) return reply(mess.bangc)
  if (!m.isGroup) return replay(mess.grouponly)
  if (!isBotAdmins) return replay(mess.botadmin)
- let response = await Miku.groupInviteCode(m.chat)
- Miku.sendMessage(m.chat, {text:`*Group Name:* *${groupMetadata.subject}* \n\n*Group Link :* \nhttps://chat.whatsapp.com/${response}l`, "contextInfo": {
+ let response = await Lexha.groupInviteCode(m.chat)
+ Lexha.sendMessage(m.chat, {text:`*Group Name:* *${groupMetadata.subject}* \n\n*Group Link :* \nhttps://chat.whatsapp.com/${response}l`, "contextInfo": {
  mimetype: "image/jpeg",
  text: `${global.OwnerName}`,
  "forwardingScore": 1000000000,
@@ -2506,7 +2506,7 @@ if (isBanChat) return reply(mess.bangc)
     if (!m.isGroup) return replay(mess.grouponly)
     if (!isBotAdmins) return replay(mess.botadmin)
     if (!isAdmins && !isCreator) return replay(mess.useradmin)
-    Miku.groupRevokeInvite(m.chat)
+    Lexha.groupRevokeInvite(m.chat)
     }
     break
 
@@ -2518,9 +2518,9 @@ if (isBanChat) return reply(mess.bangc)
      if (!isBotAdmins) return replay(mess.botadmin)
      if (!isAdmins && !isCreator) return replay(mess.useradmin)
      if (args[0] === 'close'){
-     await Miku.groupSettingUpdate(m.chat, 'announcement').then((res) => replay(`Group has been closed!`)).catch((err) => replay(jsonformat(err)))
+     await Lexha.groupSettingUpdate(m.chat, 'announcement').then((res) => replay(`Group has been closed!`)).catch((err) => replay(jsonformat(err)))
      } else if (args[0] === 'open'){
-     await Miku.groupSettingUpdate(m.chat, 'not_announcement').then((res) => replay(`Group has been opened!`)).catch((err) => replay(jsonformat(err)))
+     await Lexha.groupSettingUpdate(m.chat, 'not_announcement').then((res) => replay(`Group has been opened!`)).catch((err) => replay(jsonformat(err)))
      } else {
      let buttons = [
      { buttonId: '-group open', buttonText: { displayText: 'Open' }, type: 1 },
@@ -2534,7 +2534,7 @@ if (isBanChat) return reply(mess.bangc)
      buttons: buttons,
      headerType: 4
      }
-     Miku.sendMessage(m.chat, buttonMessage, { quoted: m })
+     Lexha.sendMessage(m.chat, buttonMessage, { quoted: m })
      }
      }
      break
@@ -2546,7 +2546,7 @@ if (isBanChat) return reply(mess.bangc)
      if (!isBotAdmins) return replay(mess.botadmin)
      if (!isAdmins && !isCreator) return replay(mess.useradmin)
      let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-     await Miku.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => replay(jsonformat(res))).catch((err) => replay(jsonformat(err)))
+     await Lexha.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => replay(jsonformat(res))).catch((err) => replay(jsonformat(err)))
      }
      break
 
@@ -2557,7 +2557,7 @@ if (isBanChat) return reply(mess.bangc)
      if (!isBotAdmins) return replay(mess.botadmin)
      if (!isAdmins && !isCreator) return replay(mess.useradmin)
      let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-     await Miku.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => replay(jsonformat(res))).catch((err) => replay(jsonformat(err)))
+     await Lexha.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => replay(jsonformat(res))).catch((err) => replay(jsonformat(err)))
      }
      break
 
@@ -2568,7 +2568,7 @@ if (isBanChat) return reply(mess.bangc)
      if (!isBotAdmins) return replay(mess.botadmin)
      if (!isAdmins && !isCreator) return replay(mess.useradmin)
      let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-     await Miku.groupParticipantsUpdate(m.chat, [users], 'remove')
+     await Lexha.groupParticipantsUpdate(m.chat, [users], 'remove')
      }
      break
 
@@ -2582,10 +2582,10 @@ if (isBanChat) return reply(mess.bangc)
      let vcc = vdd.split("https://chat.whatsapp.com/")[1]
      if (!vcc) return replay("Link invalid!")
      if (isCreator) {
-     await Miku.groupAcceptInvite(vcc).then(async(res) => replay(jsonformat(res))).catch(_ => _)
+     await Lexha.groupAcceptInvite(vcc).then(async(res) => replay(jsonformat(res))).catch(_ => _)
      replay("Succes!")
      } else {
-     Miku.query({
+     Lexha.query({
      tag: "iq",
      attrs: {
      type: "get",
@@ -2599,7 +2599,7 @@ if (isBanChat) return reply(mess.bangc)
      teks = `Sorry, munimun 20 members are required in a group to add bot!`
      sendOrder(m.chat, teks, "667140254502463", fs.readFileSync('./Assets/pic7.jpg'), `${global.packname}`, `${global.BotName}`, "916909137213@s.whatsapp.net", "AR6NCY8euY5cbS8Ybg5Ca55R8HFSuLO3qZqrIYCT7hQp0g==", "99999999999999999999")
      } else if (sizny > 20) {
-     await Miku.groupAcceptInvite(vcc).then(async(res) => replay(jsonformat(res))).catch(_ => _)
+     await Lexha.groupAcceptInvite(vcc).then(async(res) => replay(jsonformat(res))).catch(_ => _)
      replay("Joined !")
      } else {
      replay("Error")
@@ -2614,14 +2614,14 @@ if (isBanChat) return reply(mess.bangc)
         if (isBan) return reply(mess.banned)	 			
      if (isBanChat) return reply(mess.bangc)
      if (!args.join(" ")) return reply(`Example: ${prefix + command} 10`)
-     media = await Miku.downloadAndSaveMediaMessage(quoted, "volume")
+     media = await Lexha.downloadAndSaveMediaMessage(quoted, "volume")
      if (isQuotedAudio) {
      rname = getRandom('.mp3')
      exec(`ffmpeg -i ${media} -filter:a volume=${args[0]} ${rname}`, (err, stderr, stdout) => {
      fs.unlinkSync(media)
      if (err) return reply('Error!')
      jadie = fs.readFileSync(rname)
-     Miku.sendMessage(from, {audio:jadie, mimetype: 'audio/mp4', ptt: true}, {quoted: m})
+     Lexha.sendMessage(from, {audio:jadie, mimetype: 'audio/mp4', ptt: true}, {quoted: m})
      fs.unlinkSync(rname)
      })
      } else if (isQuotedVideo) {
@@ -2630,7 +2630,7 @@ if (isBanChat) return reply(mess.bangc)
      fs.unlinkSync(media)
      if (err) return reply('Error!')
      jadie = fs.readFileSync(rname)
-     Miku.sendMessage(from, {video:jadie, mimetype: 'video/mp4'}, {quoted: m})
+     Lexha.sendMessage(from, {video:jadie, mimetype: 'video/mp4'}, {quoted: m})
      fs.unlinkSync(rname)
      })
      } else {
@@ -2644,14 +2644,14 @@ if (isBanChat) return reply(mess.bangc)
         if (isBanChat) return reply(mess.bangc)
         if (!args.join(" ")) return reply(`Example: ${prefix + command} 10`)
         var req = args.join(' ')
-        media = await Miku.downloadAndSaveMediaMessage(quoted, "tempo")
+        media = await Lexha.downloadAndSaveMediaMessage(quoted, "tempo")
         if (isQuotedAudio) {
         ran = getRandom('.mp3')
         exec(`ffmpeg -i ${media} -filter:a "atempo=1.0,asetrate=${req}" ${ran}`, (err, stderr, stdout) => {
         fs.unlinkSync(media)
         if (err) return reply('Error!')
         hah = fs.readFileSync(ran)
-        Miku.sendMessage(from, {audio:hah, mimetype:'audio/mp4', ptt:true}, {quoted:m})
+        Lexha.sendMessage(from, {audio:hah, mimetype:'audio/mp4', ptt:true}, {quoted:m})
         fs.unlinkSync(ran)
         })
         } else if (isQuotedVideo) {
@@ -2660,7 +2660,7 @@ if (isBanChat) return reply(mess.bangc)
         fs.unlinkSync(media)
         if (err) return reply('Error!')
         hah = fs.readFileSync(ran)
-        Miku.sendMessage(from, {video:hah, mimetype:'video/mp4'}, {quoted:m})
+        Lexha.sendMessage(from, {video:hah, mimetype:'video/mp4'}, {quoted:m})
         fs.unlinkSync(ran)
         })
         } else {
@@ -2686,13 +2686,13 @@ if (isBanChat) return reply(mess.bangc)
             if (/tupai/.test(command)) set = '-filter:a "atempo=0.5,asetrate=65100"'
             if (/audio/.test(mime)) {
             reply(mess.waiting)
-            let media = await Miku.downloadAndSaveMediaMessage(quoted)
+            let media = await Lexha.downloadAndSaveMediaMessage(quoted)
             let ran = getRandom('.mp3')
             exec(`ffmpeg -i ${media} ${set} ${ran}`, (err, stderr, stdout) => {
             fs.unlinkSync(media)
             if (err) return reply(err)
             let buff = fs.readFileSync(ran)
-            Miku.sendMessage(m.chat, { audio: buff, mimetype: 'audio/mpeg' }, { quoted : m })
+            Lexha.sendMessage(m.chat, { audio: buff, mimetype: 'audio/mpeg' }, { quoted : m })
             fs.unlinkSync(ran)
             })
             } else reply(`Pls mention any audio you want to modify _${prefix + command}_`)
@@ -2719,9 +2719,9 @@ case 'public': {
     if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
  if (!isCreator) return reply(mess.owner)
- Miku.public = true
+ Lexha.public = true
  reply('I am now Publicly accessable!')
- Miku.setStatus(`Mode : Public`)
+ Lexha.setStatus(`Mode : Public`)
  }
  break
  
@@ -2729,9 +2729,9 @@ case 'public': {
     if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
  if (!isCreator) return reply(mess.botowner)
- Miku.public = false
+ Lexha.public = false
  reply('Only Owner can use me now!')
- Miku.setStatus(`Mode : Self`)
+ Lexha.setStatus(`Mode : Self`)
  }
  break
 
@@ -2742,13 +2742,13 @@ if (isBanChat) return reply(mess.bangc)
 if (!m.quoted) return reply('Reply Image')
 if (!/webp/.test(mime)) return reply(`Reply sticker with caption *${prefix + command}*`)
 reply(mess.waiting)
-let media = await Miku.downloadAndSaveMediaMessage(quoted)
+let media = await Lexha.downloadAndSaveMediaMessage(quoted)
 let ran = await getRandom('.png')
 exec(`ffmpeg -i ${media} ${ran}`, (err) => {
 fs.unlinkSync(media)
 if (err) throw err
 let buffer = fs.readFileSync(ran)
-Miku.sendMessage(m.chat, { image: buffer }, { quoted: m})
+Lexha.sendMessage(m.chat, { image: buffer }, { quoted: m})
 fs.unlinkSync(ran)
 })
 }
@@ -2761,9 +2761,9 @@ case 'tomp4': case 'tovideo': {
  if (!/webp/.test(mime)) return reply(`Reply sticker with caption *${prefix + command}*`)
  reply(mess.waiting)
  let { webp2mp4File } = require('./lib/uploader')
- let media = await Miku.downloadAndSaveMediaMessage(quoted)
+ let media = await Lexha.downloadAndSaveMediaMessage(quoted)
  let webpToMp4 = await webp2mp4File(media)
- await Miku.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: 'Here it is...' } }, { quoted: m })
+ await Lexha.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: 'Here it is...' } }, { quoted: m })
  await fs.unlinkSync(media)
  }
  break
@@ -2777,7 +2777,7 @@ case 'toaud': case 'toaudio': {
  let media = await quoted.download()
  let { toAudio } = require('./lib/converter')
  let audio = await toAudio(media, 'mp4')
- Miku.sendMessage(m.chat, {audio: audio, mimetype: 'audio/mpeg'}, { quoted : m })
+ Lexha.sendMessage(m.chat, {audio: audio, mimetype: 'audio/mpeg'}, { quoted : m })
  }
 break
 
@@ -2791,7 +2791,7 @@ case 'tomp3': {
  let media = await quoted.download()
  let { toAudio } = require('./lib/converter')
  let audio = await toAudio(media, 'mp4')
- Miku.sendMessage(m.chat, {document: audio, mimetype: 'audio/mpeg', fileName: `Converted By ${global.BotName} (${m.id}).mp3`}, { quoted : m })
+ Lexha.sendMessage(m.chat, {document: audio, mimetype: 'audio/mpeg', fileName: `Converted By ${global.BotName} (${m.id}).mp3`}, { quoted : m })
  }
 break
 
@@ -2803,9 +2803,9 @@ case 'togif': case 'getgif':{
  if (!/webp/.test(mime)) return reply(`Reply sticker with caption *${prefix + command}*`)
  reply(mess.wait)
  let { webp2mp4File } = require('./lib/uploader')
- let media = await Miku.downloadAndSaveMediaMessage(quoted)
+ let media = await Lexha.downloadAndSaveMediaMessage(quoted)
  let webpToMp4 = await webp2mp4File(media)
- await Miku.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: 'Converted From Webp To Gif' }, gifPlayback: true }, { quoted: m })
+ await Lexha.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: 'Converted From Webp To Gif' }, gifPlayback: true }, { quoted: m })
  await fs.unlinkSync(media)
  }
  break
@@ -2816,7 +2816,7 @@ case 'togif': case 'getgif':{
  if (isBanChat) return reply(mess.bangc)
  reply(mess.wait)
  let { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader')
- let media = await Miku.downloadAndSaveMediaMessage(quoted)
+ let media = await Lexha.downloadAndSaveMediaMessage(quoted)
  if (/image/.test(mime)) {
  let anu = await TelegraPh(media)
  reply(util.format(anu))
@@ -2830,7 +2830,7 @@ case 'togif': case 'getgif':{
 
 
  case 'owner': case 'creator': case 'mod': case 'mods':{
-    Miku.sendContact(m.chat, global.Owner, m)
+    Lexha.sendContact(m.chat, global.Owner, m)
     }
     break
 
@@ -2866,7 +2866,7 @@ buttons: buttons,
 headerType: 4,
 
 }
-Miku.sendMessage(m.chat, buttonMessage, { quoted: m })
+Lexha.sendMessage(m.chat, buttonMessage, { quoted: m })
 })
 }
 break
@@ -2919,7 +2919,7 @@ case 'google': case 'search': {
  buttons: buttons,
  headerType: 4
  }
- Miku.sendMessage(from, buttonMessage, {quoted:m})
+ Lexha.sendMessage(from, buttonMessage, {quoted:m})
  })
  } catch (err) {
  reply("An Error Occured!")
@@ -2931,9 +2931,9 @@ case 'google': case 'search': {
     if (isBan) return reply(mess.banned)	 			
 if (isBanChat) return reply(mess.bangc)
 if (args[0] === "mp4") {
-Miku.sendMessage(from, {video:{url:args[1]}, caption:'Here it is...', mimetype:'video/mp4'}, {quoted:m})
+Lexha.sendMessage(from, {video:{url:args[1]}, caption:'Here it is...', mimetype:'video/mp4'}, {quoted:m})
 } else if (args[0] === "jpg") {
-Miku.sendMessage(from, {image:{url:args[1]}, caption:'Here it is...'}, {quoted:m})
+Lexha.sendMessage(from, {image:{url:args[1]}, caption:'Here it is...'}, {quoted:m})
 } else {
 reply("Error! ")
 }
@@ -2945,7 +2945,7 @@ case 'mp4' : {
 if (isBanChat) return reply(mess.bangc)
 if (!args[0]) return reply(`Pls provide link!`)
 try {
-Miku.sendMessage(from, {video:{url:args[0]}, caption:"Succes!", contextInfo:{externalAdReply:{
+Lexha.sendMessage(from, {video:{url:args[0]}, caption:"Succes!", contextInfo:{externalAdReply:{
 title:`${global.BotName}`,
 body:`${global.OwnerName}`,
 thumbnail: BotLogo,
@@ -2964,7 +2964,7 @@ case 'jpeg': {
 if (isBanChat) return reply(mess.bangc)
  if (!args[0]) return reply(`Please provide link!`)
  try {
- Miku.sendMessage(from, {image:{url:args[0]}, caption:"Success!"}, {quoted:m})
+ Lexha.sendMessage(from, {image:{url:args[0]}, caption:"Success!"}, {quoted:m})
  } catch {
  reply("Link error")
  }
@@ -2979,7 +2979,7 @@ if (isBanChat) return reply(mess.bangc)
                  if (!isUrl(args[0]) && !args[0].includes('instagram.com')) return reply('*Invalid link!*')
                  instagramdlv3(`${text}`).then(async (data) => {            
                  var buf = await getBuffer(data[0].thumbnail)        
-                 Miku.sendMessage(m.chat, { video: { url: data[0].url }, jpegThumbnail:buf, caption: `${BotName}`}, { quoted: m })
+                 Lexha.sendMessage(m.chat, { video: { url: data[0].url }, jpegThumbnail:buf, caption: `${BotName}`}, { quoted: m })
                  }).catch((err) => {
                      reply(mess.error)
                  })
@@ -3001,9 +3001,9 @@ if (isBanChat) return reply(mess.bangc)
                     txt += `*URL :* ${data.url}\n\n`
                     txt += `*${BotName}*`
                 buf = await getBuffer(data.thumbnail)    
-                Miku.sendMessage(m.chat, { image: { url: data.thumbnail }, jpegThumbnail:buf, caption: `${txt}` }, { quoted: m })
+                Lexha.sendMessage(m.chat, { image: { url: data.thumbnail }, jpegThumbnail:buf, caption: `${txt}` }, { quoted: m })
                 for (let i of data.medias) {
-                Miku.sendMessage(m.chat, { video: { url: i.url }, jpegThumbnail:buf, caption: `*${text}*`}, { quoted: m })
+                Lexha.sendMessage(m.chat, { video: { url: i.url }, jpegThumbnail:buf, caption: `*${text}*`}, { quoted: m })
                 }
                 }).catch((err) => {
                     reply(mess.error)
@@ -3017,7 +3017,7 @@ if (isBanChat) return reply(mess.bangc)
              if (!text) return reply(`Please provide link!`)
                 if (!isUrl(args[0]) && !args[0].includes('twitter.com')) return reply(`*Invalid link!*`)
                 xfarrapi.Twitter(`${text}`).then(async (data) => {
-                Miku.sendMessage(m.chat, { audio: { url: data.medias[1].url }, mimetype: 'audio/mp4'}, { quoted: m })
+                Lexha.sendMessage(m.chat, { audio: { url: data.medias[1].url }, mimetype: 'audio/mp4'}, { quoted: m })
                 }).catch((err) => {
                     reply(mess.reply)
                 })
@@ -3048,7 +3048,7 @@ buttons: buttons,
 headerType: 4,
 
 }
-Miku.sendMessage(from, buttonMessage, {quoted:m})
+Lexha.sendMessage(from, buttonMessage, {quoted:m})
 } catch {
 reply("Link Error!")
 }
@@ -3069,7 +3069,7 @@ case 'twddlxx': {
  headerType: 4,
 
  }
- Miku.sendMessage(from, buttonMessage, {quoted:m})
+ Lexha.sendMessage(from, buttonMessage, {quoted:m})
  }
  break
 
@@ -3086,9 +3086,9 @@ case 'twddlxx': {
                      txt += `*Description:* ${data.description}\n`
                      txt += `*URL :* ${text}\n\n`
                  buf = await getBuffer(data.thumbnail)    
-                 Miku.sendMessage(m.chat, { image: { url: data.thumbnail }, jpegThumbnail:buf, caption: `${txt}` }, { quoted: m })         
+                 Lexha.sendMessage(m.chat, { image: { url: data.thumbnail }, jpegThumbnail:buf, caption: `${txt}` }, { quoted: m })         
                  for (let i of data.result) {     
-                 Miku.sendMessage(m.chat, { video: { url: i.url }, jpegThumbnail:buf, caption: `*Quality :* ${i.quality}`}, { quoted: m })
+                 Lexha.sendMessage(m.chat, { video: { url: i.url }, jpegThumbnail:buf, caption: `*Quality :* ${i.quality}`}, { quoted: m })
                  }          
                  }).catch((err) => {
                      reply(mess.error)
@@ -3103,7 +3103,7 @@ if (isBanChat) return reply(mess.bangc)
                   if (!isUrl(args[0]) && !args[0].includes('facebook.com')) return reply(`Invalid link!`)
   let noh = require('@bochilteam/scraper')                
   noh.savefrom(`${text}`).then(async (anu) => {  
-  Miku.sendMessage(m.chat, { audio: { url: anu.url[0].url }, mimetype: 'audio/mp4' }, { quoted: m })      
+  Lexha.sendMessage(m.chat, { audio: { url: anu.url[0].url }, mimetype: 'audio/mp4' }, { quoted: m })      
                 }).catch((err) => {
                     reply(mess.error)
                 })
@@ -3133,7 +3133,7 @@ buttons: buttons,
 headerType: 4,
 
 }
-Miku.sendMessage(from, buttonMessage, {quoted:m})
+Lexha.sendMessage(from, buttonMessage, {quoted:m})
 } catch {
 reply("Link invalid!")
 }
@@ -3154,7 +3154,7 @@ case 'fbddlxx': {
  headerType: 4,
 
  }
- Miku.sendMessage(from, buttonMessage, {quoted:m})
+ Lexha.sendMessage(from, buttonMessage, {quoted:m})
  }
  break
 
@@ -3164,7 +3164,7 @@ case 'fbddlxx': {
 if (!q) return reply('Please provide the link !')
 reply(mess.wait)
 if (!q.includes('tiktok')) return reply(`Invalid tiktok link!`)
- const musim_rambutan = await MikuTiktok(`${q}`).catch(e => {
+ const musim_rambutan = await LexhaTiktok(`${q}`).catch(e => {
 reply(mess.error) 
 } )
  console.log(musim_rambutan)
@@ -3182,7 +3182,7 @@ buttons: buttons,
 headerType: 4,
 
 }
-Miku.sendMessage(from, buttonMessage, {quoted:m})
+Lexha.sendMessage(from, buttonMessage, {quoted:m})
 }
 break
 
@@ -3192,12 +3192,12 @@ case 'tiktoknowm': case 'ttnowm':{
 if (!q) return reply('Please provide the link !')
 reply(mess.wait)
 if (!q.includes('tiktok')) return reply(`That's not a tiktok link!`)
- const musim_rambutan = await MikuTiktok(`${q}`).catch(e => {
+ const musim_rambutan = await LexhaTiktok(`${q}`).catch(e => {
 reply(mess.error) 
 } )
  console.log(musim_rambutan)
  const mikutiktoknowm = musim_rambutan.result.nowatermark
-  Miku.sendMessage(from, { video: { url: mikutiktoknowm }, caption: "Here it is..." }, { quoted: m })
+  Lexha.sendMessage(from, { video: { url: mikutiktoknowm }, caption: "Here it is..." }, { quoted: m })
  }
 break
 
@@ -3208,12 +3208,12 @@ case 'ttaud':{
     if (isBanChat) return reply(mess.bangc)
 if (!q) return reply('Where is the audio?')
 if (!q.includes('tiktok')) return reply(`That's not a tiktok link!`)
- const musim_rambutan = await MikuTiktok(`${q}`).catch(e => {
+ const musim_rambutan = await LexhaTiktok(`${q}`).catch(e => {
 reply(mess.error) 
 } )
  console.log(musim_rambutan)
  const mikutiktokaudio = musim_rambutan.result.nowatermark
-  Miku.sendMessage(from, { audio: { url: mikutiktokaudio }, mimetype: 'audio/mp4' }, { quoted: m })
+  Lexha.sendMessage(from, { audio: { url: mikutiktokaudio }, mimetype: 'audio/mp4' }, { quoted: m })
  }
 break
 
@@ -3234,7 +3234,7 @@ case 'play2': case 'ytplay2': {
                     ]
                     let buttonMessage = {
                         image: { url: anu.thumbnail},
-                        caption: `「 _Miku Youtube Player_ 」
+                        caption: `「 _Lexha Youtube Player_ 」
     Title : ${anu.title}
     ID : ${anu.videoId}
     Duration : ${anu.timestamp}
@@ -3247,7 +3247,7 @@ case 'play2': case 'ytplay2': {
                         buttons: buttons,
                         headerType: 4
                     }
-                    Miku.sendMessage(m.chat, buttonMessage, { quoted: m })
+                    Lexha.sendMessage(m.chat, buttonMessage, { quoted: m })
                 }
                 break
           
@@ -3259,7 +3259,7 @@ case 'ytdl2': case 'yt2': case 'youtube2':{
 if (!args[0]) return reply(mess.nolink)
 try {
 hx.youtube(args[0]).then(async(res) => {
-textyt = `「 _Miku Youtube Downloader_ 」
+textyt = `「 _Lexha Youtube Downloader_ 」
 Title : ${res.title}
 Size : ${res.size}
 Quality : ${res.quality}
@@ -3276,7 +3276,7 @@ buttons: buttons,
 headerType: 4,
 
 }
-Miku.sendMessage(from, buttonMessage, {quoted:m})
+Lexha.sendMessage(from, buttonMessage, {quoted:m})
 }).catch(_ => _)
 } catch {
 reply("Error link!")
@@ -3297,7 +3297,7 @@ case 'music': case 'play': case 'song': case 'ytplay': {
  ]
  let buttonMessage = {
  image: { url: anu.thumbnail },
- caption: `「  _Miku Youtube Player_  」
+ caption: `「  _Lexha Youtube Player_  」
 
 *Title :* ${anu.title}
 *Duration :* ${anu.timestamp}
@@ -3310,7 +3310,7 @@ case 'music': case 'play': case 'song': case 'ytplay': {
  headerType: 4,
 
  }
- Miku.sendMessage(m.chat, buttonMessage, { quoted: m })
+ Lexha.sendMessage(m.chat, buttonMessage, { quoted: m })
  }
  break
 
@@ -3320,7 +3320,7 @@ case 'music': case 'play': case 'song': case 'ytplay': {
  if (!args[0]) return reply(mess.nolink)
  try {
  hx.youtube(args[0]).then(async(res) => {
- textyt = `「  _Miku Youtube Downloader_  」
+ textyt = `「  _Lexha Youtube Downloader_  」
 *Title :* ${res.title}
 *Size :* ${res.size}
 *Quality :* ${res.quality}
@@ -3337,7 +3337,7 @@ case 'music': case 'play': case 'song': case 'ytplay': {
  headerType: 4,
 
  }
- Miku.sendMessage(from, buttonMessage, {quoted:m})
+ Lexha.sendMessage(from, buttonMessage, {quoted:m})
  }).catch(_ => _)
  } catch {
  reply("Link error!")
@@ -3349,14 +3349,14 @@ case 'music': case 'play': case 'song': case 'ytplay': {
  case 'ytvd': {
     if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
- Miku.sendMessage(from, {video:{url:args[0]}, mimetype:"video/mp4", caption:"Here it is...",}, {quoted:m})
+ Lexha.sendMessage(from, {video:{url:args[0]}, mimetype:"video/mp4", caption:"Here it is...",}, {quoted:m})
  }
  break
 
  case 'ytad': {
     if (isBan) return reply(mess.banned)	 			
     if (isBanChat) return reply(mess.bangc)
- Miku.sendMessage(from, {audio:{url:args[0]}, mimetype:"audio/mp4", ptt:true}, {quoted:m})
+ Lexha.sendMessage(from, {audio:{url:args[0]}, mimetype:"audio/mp4", ptt:true}, {quoted:m})
  }
  break
  
@@ -3371,8 +3371,8 @@ case 'music': case 'play': case 'song': case 'ytplay': {
    「  *Youtube Shorts*  」
  *TITLE:* ${data.title}\n*QUALITY:* ${data.medias[0].quality}\n*SIZE:* ${data.medias[0].formattedSize}\n*DURATION* ${data.duration}\n*LINK:* ${data.url}\n\n*${BotName}*`
    buf = await getBuffer(data.thumbnail)
-   Miku.sendMessage(m.chat, { image: { url: data.thumbnail }, jpegThumbnail:buf, caption: `${cap}` }, { quoted: m })
-   Miku.sendMessage(m.chat, { video: { url: data.medias[0].url }, jpegThumbnail:buf, caption: `*TITLE:* ${data.title}\n*QUALITY:* ${data.medias[0].quality}\n*SIZE:* ${data.medias[0].formattedSize}` }, { quoted: m })  
+   Lexha.sendMessage(m.chat, { image: { url: data.thumbnail }, jpegThumbnail:buf, caption: `${cap}` }, { quoted: m })
+   Lexha.sendMessage(m.chat, { video: { url: data.medias[0].url }, jpegThumbnail:buf, caption: `*TITLE:* ${data.title}\n*QUALITY:* ${data.medias[0].quality}\n*SIZE:* ${data.medias[0].formattedSize}` }, { quoted: m })  
                  }).catch((err) => {
                      reply(mess.reply)
                  })
@@ -3386,8 +3386,8 @@ if (isBanChat) return reply(mess.bangc)
          reply(mess.waiting)
          let anu = await fetchJson('https://raw.githubusercontent.com/iamriz7/kopel_/main/kopel.json')
          let random = anu[Math.floor(Math.random() * anu.length)]
-         Miku.sendMessage(m.chat, { image: { url: random.male }, caption: `For him...` }, { quoted: m })
-         Miku.sendMessage(m.chat, { image: { url: random.female }, caption: `For her...` }, { quoted: m })
+         Lexha.sendMessage(m.chat, { image: { url: random.male }, caption: `For him...` }, { quoted: m })
+         Lexha.sendMessage(m.chat, { image: { url: random.female }, caption: `For her...` }, { quoted: m })
      }
  break
 
@@ -3403,8 +3403,8 @@ let media = await yta(text, quality)
 if (media.filesize >= 999999) return reply('*File Over Limit* '+util.format(media))
 let caption = `*「 Youtube Music 」*\n\n*Title :* ${media.title}\n*File size :* ${media.filesizeF}\n*Url :* ${isUrl(text)}\n*Ext :* MP3\n*Resolution :* ${args[1] || '128kbps'}`
 buf = await getBuffer(media.thumb)
-Miku.sendMessage(m.chat, { image: { url: media.thumb }, jpegThumbnail:buf, caption: `${caption}` }, { quoted: m }).catch((err) => reply(mess.error))                
-Miku.sendMessage(m.chat, {audio:{url:media.dl_link}, mimetype:"audio/mpeg", fileName: `${media.title}.mp3`,  quoted: m, contextInfo: { externalAdReply:{title:media.title,body:"YOUTUBE MP3",mediaType:"2",thumbnail:buf,mediaUrl:`${text}`}}}).catch((err) => reply(mess.error))
+Lexha.sendMessage(m.chat, { image: { url: media.thumb }, jpegThumbnail:buf, caption: `${caption}` }, { quoted: m }).catch((err) => reply(mess.error))                
+Lexha.sendMessage(m.chat, {audio:{url:media.dl_link}, mimetype:"audio/mpeg", fileName: `${media.title}.mp3`,  quoted: m, contextInfo: { externalAdReply:{title:media.title,body:"YOUTUBE MP3",mediaType:"2",thumbnail:buf,mediaUrl:`${text}`}}}).catch((err) => reply(mess.error))
 }
 break
 
@@ -3420,8 +3420,8 @@ let media = await ytv(text, quality)
 if (media.filesize >= 999999) return reply('*File Over Limit* '+util.format(media))
 var capti = `*「 Youtube Video 」*\n\n*Title* : ${media.title}\n*File size* : ${media.filesizeF}\n*Url* : ${isUrl(text)}\n*Ext* : Mp4\n*Resoultion* : ${args[1] || '360p'}`
 var buf = await getBuffer(media.thumb)
-Miku.sendMessage(m.chat, { image: { url: media.thumb }, jpegThumbnail:buf, caption: `${capti}` }, { quoted: m })
-Miku.sendMessage(m.chat, { video: { url: media.dl_link }, jpegThumbnail:buf, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: `Here you go!` }, { quoted: m }).catch((err) => reply(mess.error))
+Lexha.sendMessage(m.chat, { image: { url: media.thumb }, jpegThumbnail:buf, caption: `${capti}` }, { quoted: m })
+Lexha.sendMessage(m.chat, { video: { url: media.dl_link }, jpegThumbnail:buf, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: `Here you go!` }, { quoted: m }).catch((err) => reply(mess.error))
 }
 break
 
@@ -3434,8 +3434,8 @@ anu = await fetchJson(`https://api.akuari.my.id/downloader/youtube?link=${text}`
 if (anu.filesize_video >= 999999) return reply('*File Over Limit* '+util.format(anu))
 tummb = await getBuffer(anu.thumb)
 audio = await getBuffer(anu.audio)        
-Miku.sendMessage(m.chat, {document: audio, mimetype: 'audio/mpeg', fileName: `${anu.title}`}, { quoted : m }).catch((err) => reply(mess.error))
-Miku.sendMessage(m.chat, { video: { url: anu.video }, jpegThumbnail:tummb, caption: `${util.format(anu)}`}, { quoted: m }).catch((err) => reply(mess.error))
+Lexha.sendMessage(m.chat, {document: audio, mimetype: 'audio/mpeg', fileName: `${anu.title}`}, { quoted : m }).catch((err) => reply(mess.error))
+Lexha.sendMessage(m.chat, { video: { url: anu.video }, jpegThumbnail:tummb, caption: `${util.format(anu)}`}, { quoted: m }).catch((err) => reply(mess.error))
 }
 break
 
@@ -3458,7 +3458,7 @@ case 'pinterest': case 'pin': {
  headerType: 4,
  
  }
- Miku.sendMessage(m.chat, buttonMessage, { quoted: m })
+ Lexha.sendMessage(m.chat, buttonMessage, { quoted: m })
  }).catch(_ => _)
  } catch {
  reply("Error")
@@ -3471,21 +3471,21 @@ case 'pinterest': case 'pin': {
 case 'swm': case 'take': case 'stickerwm': case 'steal':{
     if (isBan) return reply(mess.banned)
     if (isBanChat) return reply(mess.bangc)
-if (!args.join(" ")) return reply(`Use command: -steal Miku|By: Fantox`)
+if (!args.join(" ")) return reply(`Use command: -steal Lexha|By: Fantox`)
 const swn = args.join(" ")
 const pcknm = swn.split("|")[0];
 const atnm = swn.split("|")[1];
 if (m.quoted.isAnimated === true) {
-Miku.downloadAndSaveMediaMessage(quoted, "gifee")
-Miku.sendMessage(from, {sticker:fs.readFileSync("gifee.webp")},{quoted:m})
+Lexha.downloadAndSaveMediaMessage(quoted, "gifee")
+Lexha.sendMessage(from, {sticker:fs.readFileSync("gifee.webp")},{quoted:m})
 } else if (/image/.test(mime)) {
 let media = await quoted.download()
-let encmedia = await Miku.sendImageAsSticker(m.chat, media, m, { packname: pcknm, author: global.atnm })
+let encmedia = await Lexha.sendImageAsSticker(m.chat, media, m, { packname: pcknm, author: global.atnm })
 await fs.unlinkSync(encmedia)
 } else if (/video/.test(mime)) {
 if ((quoted.msg || quoted).seconds > 11) return reply('Maximum 10 seconds is allowed!')
 let media = await quoted.download()
-let encmedia = await Miku.sendVideoAsSticker(m.chat, media, m, { packname: pcknm, author: atnm })
+let encmedia = await Lexha.sendVideoAsSticker(m.chat, media, m, { packname: pcknm, author: atnm })
 await fs.unlinkSync(encmedia)
 } else {
 reply(`Send Image/Video With Caption ${prefix + command}\nVideo Duration 1-9 seconds is allowed!`)
@@ -3504,10 +3504,10 @@ if (!text) return reply(`Send/Reply Photo With Caption ${prefix + command} *text
 if (text.includes('|')) return reply(`Send/Reply Photo With Caption ${prefix + command} *text*`)
 if (!/image/.test(mime)) return reply(`Send/Reply Photo With Caption ${prefix + command} *text*`)
 reply(mess.wait)
-mee = await Miku.downloadAndSaveMediaMessage(quoted)
+mee = await Lexha.downloadAndSaveMediaMessage(quoted)
 mem = await TelegraPh(mee)
 meme = `https://api.memegen.link/images/custom/-/${text}.png?background=${mem}`
-memek = await Miku.sendImageAsSticker(m.chat, meme, m, { packname: global.packname, author: global.author })
+memek = await Lexha.sendImageAsSticker(m.chat, meme, m, { packname: global.packname, author: global.author })
 await fs.unlinkSync(memek)
 }
 break
@@ -3517,12 +3517,12 @@ case 'sgif': case 'sticker': case 's': {
     if (isBanChat) return reply(mess.bangc)
  if (/image/.test(mime)) {
  let media = await quoted.download()
- let encmedia = await Miku.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
+ let encmedia = await Lexha.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
  await fs.unlinkSync(encmedia)
  } else if (/video/.test(mime)) {
  if ((quoted.msg || quoted).seconds > 11) return reply('Maximum 10 seconds!')
  let media = await quoted.download()
- let encmedia = await Miku.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
+ let encmedia = await Lexha.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
  await fs.unlinkSync(encmedia)
  } else {
  reply(`Send Image/Video With Caption ${prefix + command}\nVideo Duration 1-9 Seconds`)
@@ -3538,7 +3538,7 @@ const res2 = await wikiSearch(q).catch(e => {
 return reply('Error Result Not Found!') 
 }) 
 const result2 = `*Title :* ${res2[0].judul}\n*Wiki :* ${res2[0].wiki}`
-Miku.sendMessage(from, { image : { url : res2[0].thumb }, caption : result2}) 
+Lexha.sendMessage(from, { image : { url : res2[0].thumb }, caption : result2}) 
 break
 
 case 'earthquake':
@@ -3548,7 +3548,7 @@ const tres = await Gempa()
 var { Waktu, Lintang, Bujur, Magnitude, Kedalaman, Wilayah, Map } = tres.result
 console.log(Map)
 const captt = `Time : ${Waktu}\nLatitude : ${Lintang}\nLongitude : ${Bujur}\nRegion : ${Wilayah}`
-Miku.sendMessage(from, { image : { url : Map }, caption : captt})
+Lexha.sendMessage(from, { image : { url : Map }, caption : captt})
 break
 
 case 'covidinfo':
@@ -3557,7 +3557,7 @@ case 'covid':
     if (isBanChat) return reply(mess.bangc)
 const c = await covid()
 var { kasus, kematian, sembuh } = c[0]
-Miku.sendMessage(from, {text : `Case : ${kasus}\n\nDead : ${kematian}\n\nHealed : ${sembuh}`}, m)
+Lexha.sendMessage(from, {text : `Case : ${kasus}\n\nDead : ${kematian}\n\nHealed : ${sembuh}`}, m)
 break
 
 case 'playstore': case 'apk':
@@ -3585,7 +3585,7 @@ let menst = [orang, jodoh]
 let buttons = [
 { buttonId: '❤️', buttonText: { displayText: 'Congratulations ❤️' }, type: 1 }
 ]
-await Miku.sendButtonText(m.chat, buttons, jawab, Miku.user.name, m, {mentions: menst})
+await Lexha.sendButtonText(m.chat, buttons, jawab, Lexha.user.name, m, {mentions: menst})
 }
 break
 
@@ -3602,7 +3602,7 @@ let ments = [me, jodoh]
 let buttons = [
 { buttonId: '❤️', buttonText: { displayText: 'Be my Soulmate ❤️' }, type: 1 }
 ]
-await Miku.sendButtonText(m.chat, buttons, jawab, Miku.user.name, m, {mentions: ments})
+await Lexha.sendButtonText(m.chat, buttons, jawab, Lexha.user.name, m, {mentions: ments})
 }
 break
 
@@ -3612,7 +3612,7 @@ case 'handsomecheck':
 				if (!text) return replay(`Tag Someone, Example : ${prefix + command} @Fantox`)
 					const gan = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','62','63','64','65','66','67','68','69','70','71','72','73','74','75','76','77','78','79','80','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95','96','97','98','99','100']
 					const teng = gan[Math.floor(Math.random() * gan.length)]
-Miku.sendMessage(from, { text: `*${command}*\n\nName : ${q}\nAnswer : *${teng}%*` }, { quoted: m })
+Lexha.sendMessage(from, { text: `*${command}*\n\nName : ${q}\nAnswer : *${teng}%*` }, { quoted: m })
 					break
 case 'beautifulcheck':
     if (isBan) return reply(mess.banned)
@@ -3620,7 +3620,7 @@ case 'beautifulcheck':
 				if (!text) return replay(`Tag Someone, Example : ${prefix + command} @Fantox`)
 					const can = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','62','63','64','65','66','67','68','69','70','71','72','73','74','75','76','77','78','79','80','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95','96','97','98','99','100']
 					const tik = can[Math.floor(Math.random() * can.length)]
-Miku.sendMessage(from, { text: `*${command}*\n\nName : ${q}\nAnswer : *${tik}%*` }, { quoted: m })
+Lexha.sendMessage(from, { text: `*${command}*\n\nName : ${q}\nAnswer : *${tik}%*` }, { quoted: m })
 					break
 
 case 'awesomecheck':
@@ -3637,7 +3637,7 @@ case 'awesomecheck':
 				if (!text) return replay(`Tag Someone, Example : ${prefix + command} @Fantox`)
 					const sangeh = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','62','63','64','65','66','67','68','69','70','71','72','73','74','75','76','77','78','79','80','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95','96','97','98','99','100']
 					const sange = sangeh[Math.floor(Math.random() * sangeh.length)]
-Miku.sendMessage(from, { text: `*${command}*\n\nName : ${q}\nAnswer : *${sange}%*` }, { quoted: m })
+Lexha.sendMessage(from, { text: `*${command}*\n\nName : ${q}\nAnswer : *${sange}%*` }, { quoted: m })
 					break
 
 
@@ -3645,9 +3645,9 @@ case 'charactercheck':
     if (isBan) return reply(mess.banned)
     if (isBanChat) return reply(mess.bangc)
 					if (!text) return replay(`Tag Someone, Example : ${prefix + command} @Fantox`)
-					const Mikutttt =['Compassionate','Generous','Grumpy','Forgiving','Obedient','Good','Simp','Kind-Hearted','patient','UwU','top, anyway','Helpful']
-					const taky = Mikutttt[Math.floor(Math.random() * Mikutttt.length)]
-					Miku.sendMessage(from, { text: `Character Check : ${q}\nAnswer : *${taky}*` }, { quoted: m })
+					const Lexhatttt =['Compassionate','Generous','Grumpy','Forgiving','Obedient','Good','Simp','Kind-Hearted','patient','UwU','top, anyway','Helpful']
+					const taky = Lexhatttt[Math.floor(Math.random() * Lexhatttt.length)]
+					Lexha.sendMessage(from, { text: `Character Check : ${q}\nAnswer : *${taky}*` }, { quoted: m })
 				     break
                    
  case 'dare':
@@ -3736,9 +3736,9 @@ case 'charactercheck':
           "put your father name on status for 5hrs",
           "send abusive words in any grup, excepting this grup, and send screenshot proof here"
      ]
-                   const Mikudareww = dare[Math.floor(Math.random() * dare.length)]
+                   const Lexhadareww = dare[Math.floor(Math.random() * dare.length)]
                    buffer = await getBuffer(`https://wallpapercave.com/wp/wp10524609.jpg`)
-                   Miku.sendMessage(from, { image: buffer, caption: '*You have chosen Dare*\n\n'+ Mikudareww }, {quoted:m})
+                   Lexha.sendMessage(from, { image: buffer, caption: '*You have chosen Dare*\n\n'+ Lexhadareww }, {quoted:m})
                    break
                        
 
@@ -3838,7 +3838,7 @@ case 'truth':
              ]
                            const mikutruthww = truth[Math.floor(Math.random() * truth.length)]
                            buffer = await getBuffer(`https://wallpapercave.com/wp/wp10524609.jpg`)
-                           Miku.sendMessage(from, { image: buffer, caption: '*You have chosen Truth*\n'+ mikutruthww }, {quoted:m})
+                           Lexha.sendMessage(from, { image: buffer, caption: '*You have chosen Truth*\n'+ mikutruthww }, {quoted:m})
                            break
 
 
@@ -3848,7 +3848,7 @@ case 'nsfwmiku':
     if (isBanChat) return reply(mess.bangc)
 reply(mess.wait)
 nye = `http://api.lolhuman.xyz/api/gimage?apikey=${lolkey}&query=${command}`
-Miku.sendMessage(from, {image:{url:nye}, caption:"Master..."}, {quoted:m})
+Lexha.sendMessage(from, {image:{url:nye}, caption:"Master..."}, {quoted:m})
 break
 
 case 'mediafire': case 'mediafiredl': {
@@ -3865,7 +3865,7 @@ const result4 = `「  *Mediafire Downloader*  」
 *Mime* : ${baby1[0].mime}
 *Link* : ${baby1[0].link}`
 reply(`${result4}`)
-Miku.sendMessage(m.chat, { document : { url : baby1[0].link}, fileName : baby1[0].nama, mimetype: baby1[0].mime }, { quoted : m }).catch ((err) => reply(mess.error))
+Lexha.sendMessage(m.chat, { document : { url : baby1[0].link}, fileName : baby1[0].nama, mimetype: baby1[0].mime }, { quoted : m }).catch ((err) => reply(mess.error))
 }
 break
 
@@ -3880,7 +3880,7 @@ try{
 reply(mess.waiting)
 NoHorny = await fetchJson(`https://myselfff.herokuapp.com/docs/nsfw/${command}`)
 YesHorny = await getBuffer(NoHorny.result)
-Miku.sendMessage(from, {image:YesHorny},{quoted:m})
+Lexha.sendMessage(from, {image:YesHorny},{quoted:m})
 } catch (e) {error("Error")}	
 break
 
@@ -3893,7 +3893,7 @@ reply(mess.waiting)
 spankd = await axios.get(`https://nekos.life/api/v2/img/spank`)                                   
   let spbuff = await getBuffer(spankd.data.url)
 let spgif = await GIFBufferToVideoBuffer(spbuff)   
-        await Miku.sendMessage(m.chat,{video: spgif, gifPlayback:true},{ quoted:m }).catch(err => {
+        await Lexha.sendMessage(m.chat,{video: spgif, gifPlayback:true},{ quoted:m }).catch(err => {
                     return reply('Error!')
                                     })
 break
@@ -3907,7 +3907,7 @@ reply(mess.waiting)
 bjd = await axios.get(`https://api.waifu.pics/nsfw/blowjob`)         
   let bjf = await getBuffer(bjd.data.url)
 let bjif = await GIFBufferToVideoBuffer(bjf)   
-        await Miku.sendMessage(m.chat,{video: bjif, gifPlayback:true},{ quoted:m }).catch(err => {
+        await Lexha.sendMessage(m.chat,{video: bjif, gifPlayback:true},{ quoted:m }).catch(err => {
                     return reply('error..')
                                     })
 break
@@ -3920,7 +3920,7 @@ case 'hentaivid': case 'hentaivideo': {
 reply(mess.waiting)
 anu = await hentai()
 result912 = anu[Math.floor(Math.random(), anu.length)]
-Miku.sendMessage(m.chat, { video: { url: result912.video_1 }, caption: `Title : ${result912.title}\nCategory : ${result912.category}\n$Mimetype : ${result912.type}\nViews : ${result912.views_count}\nShares : ${result912.share_count}\nSource : ${result912.link}\nMedia Url : ${result912.video_1}` }, { quoted: m })
+Lexha.sendMessage(m.chat, { video: { url: result912.video_1 }, caption: `Title : ${result912.title}\nCategory : ${result912.category}\n$Mimetype : ${result912.type}\nViews : ${result912.views_count}\nShares : ${result912.share_count}\nSource : ${result912.link}\nMedia Url : ${result912.video_1}` }, { quoted: m })
 }
 break
 
@@ -3940,7 +3940,7 @@ reply(mess.waiting)
   buttons: trapbot,
   headerType: 1
   }     
-            await Miku.sendMessage(m.chat, button2Messages, { quoted:m }).catch(err => {
+            await Lexha.sendMessage(m.chat, button2Messages, { quoted:m }).catch(err => {
                     return('Error!')
                 })
 break
@@ -3962,7 +3962,7 @@ reply(mess.waiting)
   buttons: hnekobot,
   headerType: 1
   }      
-            await Miku.sendMessage(m.chat, button3Messages, { quoted:m }).catch(err => {
+            await Lexha.sendMessage(m.chat, button3Messages, { quoted:m }).catch(err => {
                     return('Error!')
                 })
 break
@@ -3984,7 +3984,7 @@ reply(mess.waiting)
   buttons: nwaifubot,
   headerType: 1
   }      
-            await Miku.sendMessage(m.chat, button4Messages, { quoted:m }).catch(err => {
+            await Lexha.sendMessage(m.chat, button4Messages, { quoted:m }).catch(err => {
                     return('Error!')
                 })
 break
@@ -4006,7 +4006,7 @@ reply(mess.waiting)
       buttons: wbuttsss,
       headerType: 4
       }     
-            await Miku.sendMessage(m.chat, buttonsssMessages,{ quoted:m }).catch(err => {
+            await Lexha.sendMessage(m.chat, buttonsssMessages,{ quoted:m }).catch(err => {
                     return('Error!')
                 })
 break  
@@ -4027,7 +4027,7 @@ reply(mess.waiting)
       buttons: wbuttsss,
       headerType: 4
       }     
-            await Miku.sendMessage(m.chat, button1ssMessages,{ quoted:m }).catch(err => {
+            await Lexha.sendMessage(m.chat, button1ssMessages,{ quoted:m }).catch(err => {
                     return('Error!')
                 })
 break
@@ -4048,7 +4048,7 @@ reply(mess.waiting)
       buttons: wbuttsss,
       headerType: 4
       }     
-            await Miku.sendMessage(m.chat, button12ssMessages,{ quoted:m }).catch(err => {
+            await Lexha.sendMessage(m.chat, button12ssMessages,{ quoted:m }).catch(err => {
                     return('Error!')
                 })
 break   
@@ -4068,7 +4068,7 @@ reply(mess.waiting)
   buttons: xxhnekobot,
   headerType: 1
   }      
-            await Miku.sendMessage(m.chat, xx1button3Messages, { quoted:m }).catch(err => {
+            await Lexha.sendMessage(m.chat, xx1button3Messages, { quoted:m }).catch(err => {
                     return('Error!')
                 })
 break
@@ -4089,7 +4089,7 @@ reply(mess.waiting)
       buttons: wbuttsss,
       headerType: 4
       }     
-            await Miku.sendMessage(m.chat, button112ssMessages,{ quoted:m }).catch(err => {
+            await Lexha.sendMessage(m.chat, button112ssMessages,{ quoted:m }).catch(err => {
                     return('Error!')
                 })
 break
@@ -4110,7 +4110,7 @@ reply(mess.waiting)
       buttons: wbutsss,
       headerType: 4
       }
-            await Miku.sendMessage(m.chat,buttonssMessage, { quoted:m }).catch(err => {
+            await Lexha.sendMessage(m.chat,buttonssMessage, { quoted:m }).catch(err => {
                     return('Error!')
                 })               
                 break
@@ -4135,7 +4135,7 @@ reply(mess.waiting)
       buttons: wbuttsss,
       headerType: 4
       }     
-            await Miku.sendMessage(m.chat, buttonssMessages,{ quoted:m }).catch(err => {
+            await Lexha.sendMessage(m.chat, buttonssMessages,{ quoted:m }).catch(err => {
                     return('Error!')
                 })
 break
@@ -4174,7 +4174,7 @@ console.log(musers)
         const response = await axios.get(pat.url,  { responseType: 'arraybuffer' })
         const buffer = Buffer.from(response.data, "utf-8")
 		var fetchedgif = await GIFBufferToVideoBuffer(buffer)
-		Miku.sendMessage(m.chat,{video: fetchedgif, gifPlayback:true,mentions:ment,caption:musers},{quoted:m})
+		Lexha.sendMessage(m.chat,{video: fetchedgif, gifPlayback:true,mentions:ment,caption:musers},{quoted:m})
     } catch (error) {
         console.log(error);
     }
@@ -4211,7 +4211,7 @@ console.log(musers)
         const response = await axios.get(pat.url,  { responseType: 'arraybuffer' })
         const buffer = Buffer.from(response.data, "utf-8")
 		var fetchedgif = await GIFBufferToVideoBuffer(buffer)
-		Miku.sendMessage(m.chat,{video: fetchedgif, gifPlayback:true,mentions:ment,caption:musers},{quoted:m})
+		Lexha.sendMessage(m.chat,{video: fetchedgif, gifPlayback:true,mentions:ment,caption:musers},{quoted:m})
     } catch (error) {
         console.log(error);
     }
@@ -4248,7 +4248,7 @@ console.log(musers)
         const response = await axios.get(pat.url,  { responseType: 'arraybuffer' })
         const buffer = Buffer.from(response.data, "utf-8")
 		var fetchedgif = await GIFBufferToVideoBuffer(buffer)
-		Miku.sendMessage(m.chat,{video: fetchedgif, gifPlayback:true,mentions:ment,caption:musers},{quoted:m})
+		Lexha.sendMessage(m.chat,{video: fetchedgif, gifPlayback:true,mentions:ment,caption:musers},{quoted:m})
     } catch (error) {
         console.log(error);
     }
@@ -4286,7 +4286,7 @@ console.log(musers)
         const response = await axios.get(pat.url,  { responseType: 'arraybuffer' })
         const buffer = Buffer.from(response.data, "utf-8")
 		var fetchedgif = await GIFBufferToVideoBuffer(buffer)
-		Miku.sendMessage(m.chat,{video: fetchedgif, gifPlayback:true,mentions:ment,caption:musers},{quoted:m})
+		Lexha.sendMessage(m.chat,{video: fetchedgif, gifPlayback:true,mentions:ment,caption:musers},{quoted:m})
     } catch (error) {
         console.log(error);
     }
@@ -4326,7 +4326,7 @@ console.log(musers)
         const response = await axios.get(pat.url,  { responseType: 'arraybuffer' })
         const buffer = Buffer.from(response.data, "utf-8")
 		var fetchedgif = await GIFBufferToVideoBuffer(buffer)
-		Miku.sendMessage(m.chat,{video: fetchedgif, gifPlayback:true,mentions:ment,caption:musers},{quoted:m})
+		Lexha.sendMessage(m.chat,{video: fetchedgif, gifPlayback:true,mentions:ment,caption:musers},{quoted:m})
     } catch (error) {
         console.log(error);
     }
@@ -4368,7 +4368,7 @@ console.log(musers)
         const response = await axios.get(pat.url,  { responseType: 'arraybuffer' })
         const buffer = Buffer.from(response.data, "utf-8")
 		var fetchedgif = await GIFBufferToVideoBuffer(buffer)
-		Miku.sendMessage(m.chat,{video: fetchedgif, gifPlayback:true,mentions:ment,caption:musers},{quoted:m})
+		Lexha.sendMessage(m.chat,{video: fetchedgif, gifPlayback:true,mentions:ment,caption:musers},{quoted:m})
     } catch (error) {
         console.log(error);
     }
@@ -4392,7 +4392,7 @@ case 'cringe': case 'cuddle': case 'highfive': case 'handhold': case 'kick':
 resggh = await axios.get(`https://nekos.life/api/v2/img/${command}`)         
 let resffj = await getBuffer(resggh.data.url)
 let resmain = await GIFBufferToVideoBuffer(resffj)   
-      await Miku.sendMessage(m.chat,{video: resmain, gifPlayback:true},{ quoted:m }).catch(err => {
+      await Lexha.sendMessage(m.chat,{video: resmain, gifPlayback:true},{ quoted:m }).catch(err => {
                   return reply('error..')
                                   })
 break
@@ -4418,7 +4418,7 @@ var wbutsss = [
           buttons: wbutsss,
      headerType: 4
                       }
-await Miku.sendMessage(m.chat,buttonzMessage, { quoted:m }).catch(err => {
+await Lexha.sendMessage(m.chat,buttonzMessage, { quoted:m }).catch(err => {
      return('Error!')
     })               
 break     
@@ -4439,7 +4439,7 @@ case 'awoo':
   buttons: wbuttsss,
   headerType: 2
   }       
-            await Miku.sendMessage(m.chat, button1Messages, { quoted:m }).catch(err => {
+            await Lexha.sendMessage(m.chat, button1Messages, { quoted:m }).catch(err => {
                     return('Error!')
                 })
 break
@@ -4469,7 +4469,7 @@ var walb = [
       buttons: walb,
       headerType: 4
       }     
-            await Miku.sendMessage(m.chat, wal,{ quoted:m }).catch(err => {
+            await Lexha.sendMessage(m.chat, wal,{ quoted:m }).catch(err => {
                     return('Error!')
                 })          
 break
@@ -4519,7 +4519,7 @@ const { Anime } =require("@shineiichijo/marika")
       /\[Written by MAL Rewrite]/g,
       ""
     )}`
-Miku.sendMessage(m.chat,{image:{url:result.images.jpg.large_image_url},caption:details},{quoted:m})   
+Lexha.sendMessage(m.chat,{image:{url:result.images.jpg.large_image_url},caption:details},{quoted:m})   
 break
 
 case 'manga':
@@ -4554,7 +4554,7 @@ let srh = await manga.searchManga(q)
       /\[Written by MAL Rewrite]/g,
       ""
     )}`;
-Miku.sendMessage(m.chat,{image:{url:srh.data[0].images.jpg.large_image_url},caption:mang},{quoted:m})   
+Lexha.sendMessage(m.chat,{image:{url:srh.data[0].images.jpg.large_image_url},caption:mang},{quoted:m})   
 break
 
 
@@ -4575,7 +4575,7 @@ reply(mess.waiting)
         headerType: 4
          }     
                                   
-    await Miku.sendMessage(m.chat, button4Messagess, { quoted:m }).catch(err => {
+    await Lexha.sendMessage(m.chat, button4Messagess, { quoted:m }).catch(err => {
         return('error..')
         })
 break
@@ -4596,7 +4596,7 @@ reply(mess.waiting)
         headerType: 2
          }     
                                   
-    await Miku.sendMessage(m.chat, buttonMessagessf, { quoted:m }).catch(err => {
+    await Lexha.sendMessage(m.chat, buttonMessagessf, { quoted:m }).catch(err => {
         return('error..')
         })
 break
@@ -4618,7 +4618,7 @@ reply(mess.waiting)
         headerType: 2
          }     
                                   
-    await Miku.sendMessage(m.chat, buttonMessagessfgr, { quoted:m }).catch(err => {
+    await Lexha.sendMessage(m.chat, buttonMessagessfgr, { quoted:m }).catch(err => {
         return('error..')
         })
 break
@@ -4662,7 +4662,7 @@ case "darkjoke":
     if (!m.isGroup) return replay(mess.grouponly)
 var res = await Darkjokes()
 teks = "\nDarkjokes"
-Miku.sendMessage(m.chat, { image : { url : res }, caption: teks }, { quoted : m })
+Lexha.sendMessage(m.chat, { image : { url : res }, caption: teks }, { quoted : m })
 break
 
 case 'leavegc': case 'leavegroup': case 'bye': {
@@ -4671,7 +4671,7 @@ case 'leavegc': case 'leavegroup': case 'bye': {
     if (!m.isGroup) return replay(mess.grouponly)
         reply(mess.waiting)
                     if (!isCreator) return replay(`${mess.botowner}`)
-                    await Miku.groupLeave(m.chat).then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
+                    await Lexha.groupLeave(m.chat).then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
                 }
                 break
 
@@ -4697,7 +4697,7 @@ id: '-owner'
 }
 }]
 let txt = `「 *${global.OwnerName}'s Broadcast* 」\n\n${text}`
-Miku.send5ButImg(yoi, txt, `${global.BotName}`, BotLogo, btn, Thumb)
+Lexha.send5ButImg(yoi, txt, `${global.BotName}`, BotLogo, btn, Thumb)
 }
 replay('Broadcast Sent !')
 }
@@ -4710,7 +4710,7 @@ case 'help': case 'h': case 'menu': case 'allmenu': case 'listmenu':{
       
  const helpmenu = `Konichiwa *${pushname}* Senpai,
 
-I am *Miku Nakano*, a bot developed by *Fantox*.
+I am *Lexha Nakano*, a bot developed by *Fantox*.
 
 🔰 My prefix is:  ${prefix}
 
@@ -4798,13 +4798,13 @@ translate, fliptext, toletter
     {buttonId: `-owner`, buttonText: {displayText: 'Bot Owner'}, type: 1}
     ]
                 let buttonMessage = {
-                    file: Miku.sendMessage(m.chat,{video:fs.readFileSync('./system/miku2.mp4'),gifPlayback:true,caption:helpmenu},{quoted:m}),
+                    file: Lexha.sendMessage(m.chat,{video:fs.readFileSync('./system/miku2.mp4'),gifPlayback:true,caption:helpmenu},{quoted:m}),
                     caption: helpmenu,
                     footer: `${BotName}`,
                     buttons: buttonshelpm,
                     headerType: 4
                 }
-            Miku.sendMessage(m.chat, buttonMessage,{ quoted:m })
+            Lexha.sendMessage(m.chat, buttonMessage,{ quoted:m })
                 }
 break
 
@@ -4824,13 +4824,13 @@ case '':
                 {buttonId: `-help`, buttonText: {displayText: 'Help'}, type: 1}
                 ]
                 let buttonMessage = {
-                    file: Miku.sendMessage(m.chat,{video:fs.readFileSync('./system/miku.mp4'),gifPlayback:true,caption:needhelpmenu},{quoted:m}),
+                    file: Lexha.sendMessage(m.chat,{video:fs.readFileSync('./system/miku.mp4'),gifPlayback:true,caption:needhelpmenu},{quoted:m}),
                     caption: needhelpmenu,
                     footer: `${global.BotName}`,
                     buttons: butRun,
                     headerType: 4
                 }
-            Miku.sendMessage(m.chat,buttonMessage,{quoted:m})
+            Lexha.sendMessage(m.chat,buttonMessage,{quoted:m})
                 }
 break
 
@@ -4874,7 +4874,7 @@ return reply(bang)
 try {
 reply(util.format(eval(`(async () => { ${budy.slice(3)} })()`)))
 } catch (e) {
-Miku.sendMessage(from, {image:ErrorPic, caption:String(e)}, {quoted:m})
+Lexha.sendMessage(from, {image:ErrorPic, caption:String(e)}, {quoted:m})
 }
 }
 if (budy.startsWith('>')) {
@@ -4884,7 +4884,7 @@ let evaled = await eval(budy.slice(2))
 if (typeof evaled !== 'string') evaled = require('util').inspect(evaled)
 await reply(evaled)
 } catch (err) {
-await Miku.sendMessage(from, {image:ErrorPic, caption:String(err)}, {quoted:m})
+await Lexha.sendMessage(from, {image:ErrorPic, caption:String(err)}, {quoted:m})
 }
 }
 
@@ -4893,7 +4893,7 @@ await Miku.sendMessage(from, {image:ErrorPic, caption:String(err)}, {quoted:m})
 if (budy.startsWith('$')) {
 if (!isCreator) return replay(mess.botowner)
 exec(budy.slice(2), (err, stdout) => {
-if(err) return Miku.sendMessage(from, {image:ErrorPic, caption:String(err)}, {quoted:m})
+if(err) return Lexha.sendMessage(from, {image:ErrorPic, caption:String(err)}, {quoted:m})
 if (stdout) return replay(stdout)
 })
 }
@@ -4904,11 +4904,12 @@ if (m.chat.endsWith('broadcast')) return
 if (m.isBaileys) return
 let msgs = global.db.database
 if (!(budy.toLowerCase() in msgs)) return
-Miku.copyNForward(m.chat, msgs[budy.toLowerCase()], true)
+Lexha.copyNForward(m.chat, msgs[budy.toLowerCase()], true)
 }
 }
 } catch (err) {
-Miku.sendMessage(`${ownertag}@s.whatsapp.net`, util.format(err), {quoted:m})
+Lexha
+.sendMessage(`${ownertag}@s.whatsapp.net`, util.format(err), {quoted:m})
 console.log(err)
 }
 }

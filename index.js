@@ -27,7 +27,7 @@ console.log(color(figlet.textSync('Lexha Bot MD', {
         }), 'yellow'))
 
 console.log(color('\nHello, I am H3L7BOY, the main developer of this bot.\n\nThanks for using: Lexha Bot','aqua'))
-console.log(color('\nYou can follow me on GitHub: FantoX001','aqua'))
+console.log(color('\nYou can follow me on GitHub: H3L7BOY001','aqua'))
 
     let { version, isLatest } = await fetchLatestBaileysVersion()
     const Lexha = LexhaConnect({

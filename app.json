@@ -1,8 +1,8 @@
 {
-  "name": "Miku-MD",
+  "name": "Lexha-MD",
   "description": "A whatsApp bot based on Baileys linrary with Multi Device support",
-  "repository": "https://github.com/FantoX001/Miku-MD",
-  "logo": "https://wallpapercave.com/wp/wp10524580.jpg",
+  "repository": "https://github.com/H3L7BOY001/Lexha-MD",
+  "logo": "https://telegra.ph/file/248c6d746a1aebe8176e3.jpg",
   "keywords": ["nodejs", "bot", "whatsapp bot", "whatsapp automation", "multi device"],
   "buildpacks": [
     {

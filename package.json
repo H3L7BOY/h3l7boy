@@ -1,6 +1,6 @@
 {
- "name": "miku-md",
- "description": "Multi Device Whatsapp Bot By Xeon",
+ "name": "Lexha-md",
+ "description": "Multi Device Whatsapp Bot By H3L7BOY",
  "version": "3.0.0",
  "main": "index.js",
  "type": "commonjs",
@@ -18,7 +18,7 @@
   "bot-md",
   "multi-device"
  ],
- "author": "Fantox (FantoX001)",
+ "author": "H3L7BOY (__h3llboy___)",
  "license": "MIT",
  "dependencies": {
   "@adiwajshing/baileys": "^4.3.0",
@@ -85,10 +85,10 @@
  },
  "repository": {
   "type": "git",
-  "url": "git+https://github.com/DGXeon/CheemsBot-MD3.git"
+  "url": "git+https://github.com/H3L7BOY/CheemsBot-MD3.git"
  },
  "bugs": {
-  "url": "https://github.com/DGXeon/CheemsBot-MD3/issues"
+  "url": "https://github.com/H3L7BOY/CheemsBot-MD3/issues"
  },
- "homepage": "https://github.com/DGXeon/CheemsBot-MD3#readme"
+ "homepage": "https://github.com/H3L7BOY/CheemsBot-MD3#readme"
 }

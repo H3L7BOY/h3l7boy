@@ -26,14 +26,14 @@ console.log(color(figlet.textSync('Lexha Bot MD', {
 		whitespaceBreak: true
         }), 'yellow'))
 
-console.log(color('\nHello, I am Fantox, the main developer of this bot.\n\nThanks for using: Lexha Bot','aqua'))
+console.log(color('\nHello, I am H3L7BOY, the main developer of this bot.\n\nThanks for using: Lexha Bot','aqua'))
 console.log(color('\nYou can follow me on GitHub: FantoX001','aqua'))
 
     let { version, isLatest } = await fetchLatestBaileysVersion()
     const Lexha = LexhaConnect({
         logger: pino({ level: 'silent' }),
         printQRInTerminal: true,
-        browser: ['Lexha by: Fantox','Safari','1.0.0'],
+        browser: ['Lexha by: H3L7BOY','Safari','1.0.0'],
         auth: state,
         version
     })

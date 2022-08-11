@@ -1524,7 +1524,7 @@ case 'support': case 'supportgc':
 
 case 'repo': case 'botrepo':
     
-    reply(`*My Source Code:* https://github.com/FantoX001/Lexha-MD`)
+    reply(`*My Source Code:* https://github.com/H3L7BOY/Lexha-MD`)
     break
 
 case 'nsfwmenu':
